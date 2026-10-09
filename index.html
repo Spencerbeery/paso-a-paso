@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Paso a Paso</title>
+<meta name="description" content="A Spanish course from A1 to B1 with spaced repetition, stories and grammar guides.">
+<meta name="theme-color" content="#EEF3F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1A18" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Paso a Paso">
+<style>
+:root{color-scheme:light dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html,body{margin:0;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{font:14px system-ui,sans-serif;overscroll-behavior-y:none}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#EEF3F1;--surface:#FFFFFF;--sunk:#E2EAE7;--ink:#14302C;--muted:#5A6F6B;--line:#D3DEDB;
+  --accent:#F0A202;--accent-deep:#C07E00;--accent-ink:#3D2900;
+  --s1:#16857A;--s1d:#0D5F57;--s2:#D9534A;--s2d:#A53A32;--s3:#4C55C7;--s3d:#343B94;
+  --good:#1F9D55;--good-d:#15763F;--good-bg:#DDF5E6;--bad:#D2443B;--bad-d:#A3302A;--bad-bg:#FBE3E1;
+  --lock:#CCD6D3;--lockd:#AFBCB8;--onc:#FFFFFF;
+  --font-d:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --font-b:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --r:16px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1A18;--surface:#172422;--sunk:#1F2F2C;--ink:#E4EEEB;--muted:#93A7A2;--line:#2A3C39;
+  --accent:#F5B42A;--accent-deep:#AD7300;--accent-ink:#2A1C00;
+  --s1:#21A090;--s1d:#13726A;--s2:#E5645B;--s2d:#AD453E;--s3:#6870DE;--s3d:#464DAA;
+  --good:#3CC277;--good-d:#228A50;--good-bg:#15352A;--bad:#F06A60;--bad-d:#B3463F;--bad-bg:#3A1E1C;
+  --lock:#2F413D;--lockd:#22312E;--onc:#FFFFFF;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1A18;--surface:#172422;--sunk:#1F2F2C;--ink:#E4EEEB;--muted:#93A7A2;--line:#2A3C39;
+  --accent:#F5B42A;--accent-deep:#AD7300;--accent-ink:#2A1C00;
+  --s1:#21A090;--s1d:#13726A;--s2:#E5645B;--s2d:#AD453E;--s3:#6870DE;--s3d:#464DAA;
+  --good:#3CC277;--good-d:#228A50;--good-bg:#15352A;--bad:#F06A60;--bad-d:#B3463F;--bad-bg:#3A1E1C;
+  --lock:#2F413D;--lockd:#22312E;--onc:#FFFFFF;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:16px;line-height:1.5}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--font-d);text-wrap:balance;margin:0;line-height:1.15}
+.ico{width:1em;height:1em;flex:none}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:2px solid var(--line)}
+.top-in{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{font-family:var(--font-d);font-weight:800;font-size:22px;letter-spacing:-.02em;margin-right:auto;display:flex;align-items:baseline;gap:6px}
+.brand small{font-family:var(--font-b);font-weight:600;font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.chip{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:15px;padding:6px 10px;border-radius:999px;background:var(--surface);border:2px solid var(--line);font-variant-numeric:tabular-nums}
+.chip .ico{width:18px;height:18px}
+.chip.flame .ico{color:var(--accent)}
+.chip.flame.off .ico{color:var(--lockd)}
+.chip.rev{background:var(--accent);border-color:var(--accent-deep);color:var(--accent-ink)}
+.chip.rev[disabled]{background:var(--surface);border-color:var(--line);color:var(--muted);cursor:default}
+
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:20px 80px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:32px;align-items:start}
+@media (max-width:860px){.wrap{grid-template-columns:minmax(0,1fr)}.rail{order:2}}
+.path{min-width:0;display:flex;flex-direction:column;gap:28px}
+
+.welcome{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:12px}
+.welcome p{margin:0;color:var(--muted);max-width:60ch}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+
+.sec-head{display:flex;flex-direction:column;gap:6px;padding-top:8px}
+.sec-head .eyebrow{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sec-head h2{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.sec-head p{margin:0;color:var(--muted)}
+.cefr{display:inline-block;font-family:var(--font-b);font-size:13px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--sunk);color:var(--ink);vertical-align:middle;margin-left:8px;letter-spacing:.02em}
+
+.unit{display:flex;flex-direction:column;gap:18px}
+.ubanner{background:var(--c);color:var(--onc);border-radius:var(--r);padding:16px 18px;display:flex;gap:14px;align-items:center;box-shadow:0 5px 0 var(--cd)}
+.ubanner .t{flex:1;min-width:0}
+.ubanner .k{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.ubanner h3{font-size:22px;font-weight:800;margin:2px 0}
+.ubanner p{margin:0;font-size:14px;opacity:.92}
+.ubanner .meter{height:6px;border-radius:3px;background:rgba(255,255,255,.28);margin-top:10px;overflow:hidden;max-width:220px}
+.ubanner .meter i{display:block;height:100%;background:#fff;border-radius:3px}
+.gbtn{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.4);color:#fff;border-radius:12px;padding:8px 10px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.gbtn .ico{width:22px;height:22px}
+.gbtn:hover{background:rgba(255,255,255,.26)}
+
+.nodes{display:flex;flex-direction:column;align-items:center;gap:14px;padding-block:48px 6px}
+.nwrap{position:relative;transform:translateX(var(--x));display:flex;flex-direction:column;align-items:center}
+.node{width:70px;height:64px;border-radius:50%;border:none;display:grid;place-items:center;background:var(--lock);color:var(--lockd);box-shadow:0 7px 0 var(--lockd);transition:transform .08s,box-shadow .08s;position:relative}
+.node .ico{width:30px;height:30px}
+.node.done{background:var(--c);color:#fff;box-shadow:0 7px 0 var(--cd)}
+.node.cur{background:var(--c);color:#fff;box-shadow:0 7px 0 var(--cd),0 0 0 8px var(--bg),0 0 0 13px var(--line)}
+.node.done.gold{background:var(--accent);box-shadow:0 7px 0 var(--accent-deep);color:var(--accent-ink)}
+.node:not(.locked):active{transform:translateY(5px);box-shadow:0 2px 0 var(--cd)}
+.node.locked{cursor:default}
+.node.k-story,.node.k-review,.node.k-tip{border-radius:20px}
+.bubble{position:absolute;bottom:calc(100% + 18px);white-space:nowrap;background:var(--surface);border:2px solid var(--line);color:var(--c);font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:10px;animation:bob 1.6s ease-in-out infinite}
+.bubble::after{content:"";position:absolute;left:50%;top:100%;width:12px;height:12px;background:var(--surface);border-right:2px solid var(--line);border-bottom:2px solid var(--line);transform:translate(-50%,-6px) rotate(45deg)}
+.ncap{font-size:12px;font-weight:600;color:var(--muted);margin-top:12px;text-align:center;max-width:140px}
+@keyframes bob{50%{transform:translateY(-5px)}}
+
+.rail{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media (min-width:861px){.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);max-height:calc(100vh - 96px);overflow-y:auto}}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:17px;font-weight:800}
+.card .sub{font-size:14px;color:var(--muted);margin:0}
+.big{font-family:var(--font-d);font-weight:800;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.streak{display:flex;align-items:center;gap:12px}
+.streak .ico{width:40px;height:40px;color:var(--accent)}
+.streak.off .ico{color:var(--lockd)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:11px;color:var(--muted);font-weight:700}
+.week i{display:block;width:24px;height:24px;margin:4px auto 0;border-radius:50%;background:var(--sunk)}
+.week i.on{background:var(--accent)}
+.week i.today{box-shadow:0 0 0 2px var(--ink) inset}
+.bar{height:14px;border-radius:7px;background:var(--sunk);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:7px;transition:width .4s}
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stats3 div{display:flex;flex-direction:column;gap:2px}
+.stats3 b{font-family:var(--font-d);font-size:22px;font-variant-numeric:tabular-nums}
+.stats3 span{font-size:12px;color:var(--muted);font-weight:600}
+.chart text{font-size:10px;fill:var(--muted);font-family:var(--font-b);font-weight:600}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:5px 10px;font-weight:700;font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.setrow{display:flex;flex-direction:column;gap:6px}
+.setrow label,.setrow .lab{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.tog{display:flex;align-items:center;gap:8px;font-size:14px}
+.tog input{width:18px;height:18px;accent-color:var(--s1)}
+details.method summary{cursor:pointer;font-weight:800;font-family:var(--font-d);font-size:17px}
+details.method ul{margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+details.method b{color:var(--ink)}
+.sync{font-size:12px;color:var(--muted)}
+
+.btn{border:none;border-radius:14px;padding:12px 20px;font-weight:800;font-size:15px;letter-spacing:.05em;text-transform:uppercase;background:var(--s1);color:#fff;box-shadow:0 4px 0 var(--s1d);transition:transform .06s,box-shadow .06s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--s1d)}
+.btn.ghost{background:var(--surface);color:var(--ink);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.btn.warn{background:var(--bad);box-shadow:0 4px 0 var(--bad-d)}
+.btn.good{background:var(--good);box-shadow:0 4px 0 var(--good-d)}
+.btn[disabled]{background:var(--sunk);color:var(--muted);box-shadow:0 4px 0 var(--line);cursor:default;transform:none}
+.btn.small{padding:8px 14px;font-size:13px;border-radius:11px}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;z-index:50;max-width:calc(100% - 32px)}
+
+.ov{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.ov-top{max-width:760px;width:100%;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:14px}
+.xbtn{background:none;border:none;color:var(--muted);padding:4px;display:grid;place-items:center}
+.xbtn .ico{width:26px;height:26px}
+.prog{flex:1;height:16px;border-radius:8px;background:var(--sunk);overflow:hidden}
+.prog i{display:block;height:100%;background:var(--good);border-radius:8px;transition:width .35s;position:relative}
+.prog i::after{content:"";position:absolute;left:8px;right:8px;top:4px;height:4px;border-radius:2px;background:rgba(255,255,255,.35)}
+.combo{font-weight:800;color:var(--accent-deep);font-size:14px;min-width:70px;text-align:right;font-variant-numeric:tabular-nums}
+.hearts{font-weight:800;color:var(--bad);font-size:14px}
+.ov-body{flex:1;overflow-y:auto}
+.ex{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:16px 32px;display:flex;flex-direction:column;gap:22px}
+.ex h2{font-size:26px;font-weight:800;letter-spacing:-.01em}
+.newtag{align-self:flex-start;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--s3);background:var(--sunk);padding:4px 10px;border-radius:8px}
+.prompt{display:flex;gap:12px;align-items:flex-start}
+.say{flex:none;width:46px;height:46px;border-radius:12px;border:none;background:var(--s3);color:#fff;box-shadow:0 4px 0 var(--s3d);display:grid;place-items:center}
+.say .ico{width:24px;height:24px}
+.say.slow{width:36px;height:36px;font-size:11px;font-weight:800;margin-top:5px;background:var(--surface);color:var(--s3);border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.ptext{font-size:22px;font-weight:600;line-height:1.35;padding:8px 14px;border:2px solid var(--line);border-radius:14px;background:var(--surface);min-width:0}
+.ptext.en{font-weight:500}
+.peek{background:none;border:none;color:var(--muted);font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;padding:0;align-self:flex-start}
+.hint{color:var(--muted);font-size:15px;margin:0}
+.bigsay{display:flex;gap:14px;justify-content:center;align-items:center;padding:10px 0}
+.bigsay .say{width:110px;height:90px;border-radius:20px;box-shadow:0 6px 0 var(--s3d)}
+.bigsay .say .ico{width:44px;height:44px}
+.bigsay .say.slow{width:64px;height:64px;font-size:14px}
+.opts{display:grid;grid-template-columns:1fr;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 14px;box-shadow:0 3px 0 var(--line);font-size:17px}
+.opt kbd{flex:none;width:26px;height:26px;border:2px solid var(--line);border-radius:7px;display:grid;place-items:center;font:700 13px var(--font-b);color:var(--muted)}
+.opt[aria-pressed="true"]{border-color:var(--s3);background:color-mix(in srgb,var(--s3) 12%,var(--surface));box-shadow:0 3px 0 var(--s3)}
+.opt[aria-pressed="true"] kbd{border-color:var(--s3);color:var(--s3)}
+.opt[disabled]{cursor:default}
+.lane{min-height:64px;border-bottom:2px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;padding:8px 0;align-content:flex-start;background:repeating-linear-gradient(to bottom,transparent 0 55px,var(--line) 55px 57px)}
+.bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tile{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 13px;font-size:17px;box-shadow:0 3px 0 var(--line);font-weight:500}
+.tile.used{background:var(--sunk);color:transparent;box-shadow:none;border-color:var(--sunk);cursor:default}
+.cloze{font-size:22px;font-weight:600;line-height:1.8}
+.blank{display:inline-block;min-width:90px;border-bottom:3px solid var(--ink);text-align:center;color:var(--s3);padding:0 6px}
+textarea.ans{width:100%;min-height:110px;resize:vertical;border:2px solid var(--line);background:var(--sunk);border-radius:14px;padding:12px 14px;font:500 18px var(--font-b);color:var(--ink)}
+.accents{display:flex;flex-wrap:wrap;gap:6px}
+.accents button{border:2px solid var(--line);background:var(--surface);border-radius:9px;min-width:38px;padding:5px 8px;font-size:17px;font-weight:600;box-shadow:0 2px 0 var(--line)}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.match .col{display:flex;flex-direction:column;gap:10px;min-width:0}
+.mt{border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:12px;font-size:16px;box-shadow:0 3px 0 var(--line);text-align:center;min-height:62px}
+.mt[aria-pressed="true"]{border-color:var(--s3);box-shadow:0 3px 0 var(--s3);color:var(--s3)}
+.mt.gone{opacity:.35;box-shadow:none;cursor:default}
+.mt.wrong{border-color:var(--bad);color:var(--bad);animation:shake .3s}
+.mt.right{border-color:var(--good);color:var(--good)}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+.foot{border-top:2px solid var(--line);background:var(--bg)}
+.foot.ok{background:var(--good-bg);border-color:transparent}
+.foot.bad{background:var(--bad-bg);border-color:transparent}
+.foot-in{max-width:760px;margin:0 auto;padding:16px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.fb{min-width:0;flex:1 1 260px}
+.fb strong{font-family:var(--font-d);font-size:22px;font-weight:800;display:block}
+.foot.ok .fb strong{color:var(--good)}
+.foot.bad .fb strong{color:var(--bad)}
+.fb .ansl{font-size:16px;margin-top:2px}
+.fb .note{font-size:14px;color:var(--muted);margin-top:2px}
+.fbtns{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto}
+.linkbtn{background:none;border:none;font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px;color:var(--muted);padding:6px}
+
+.story{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:8px 32px;display:flex;flex-direction:column;gap:14px}
+.story h2{font-size:28px;font-weight:800}
+.sline{display:flex;gap:10px;align-items:flex-start}
+.spk{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;font-family:var(--font-d)}
+.sbody{min-width:0;flex:1}
+.sname{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.stext{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:8px 12px;font-size:18px;text-align:left;width:100%;display:block}
+.stext .tr{display:block;font-size:14px;color:var(--muted);margin-top:4px}
+.sline.fresh .stext{border-color:var(--s3)}
+.sq{background:var(--surface);border:2px dashed var(--s3);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:10px}
+.sq .q{font-weight:700}
+.opt.right{border-color:var(--good);color:var(--good);box-shadow:0 3px 0 var(--good)}
+.opt.wrong{border-color:var(--bad);color:var(--bad);animation:shake .3s}
+
+.done-scr{max-width:520px;margin:0 auto;padding-inline:16px;padding-block:48px;display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center}
+.done-scr h2{font-size:38px;font-weight:800;letter-spacing:-.02em}
+.done-scr p{margin:0;color:var(--muted)}
+.tiles3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
+.tiles3 div{border:2px solid var(--tc);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.tiles3 span{background:var(--tc);color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px}
+.tiles3 b{font-family:var(--font-d);font-size:26px;padding:10px 4px;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+.gb{max-width:680px;margin:0 auto;padding-inline:16px;padding-block:8px 48px;display:flex;flex-direction:column;gap:18px}
+.gb h2{font-size:30px;font-weight:800}
+.gb h4{font-family:var(--font-d);font-size:19px;margin:8px 0 0}
+.gb p{margin:0;max-width:65ch}
+.gb .tbl{overflow-x:auto}
+.gb table{border-collapse:collapse;font-size:15px;min-width:300px}
+.gb th,.gb td{border-bottom:1px solid var(--line);padding:6px 14px 6px 0;text-align:left;vertical-align:top}
+.gb th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gb td b{color:var(--c)}
+.kp{display:flex;flex-direction:column;gap:8px}
+.kp div{display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:8px}
+.kp .say{width:36px;height:36px;border-radius:10px;box-shadow:0 3px 0 var(--s3d)}
+.kp .say .ico{width:18px;height:18px}
+.kp span{min-width:0}
+.kp small{display:block;color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:480px){.ex h2{font-size:22px}.ptext{font-size:19px}.node{width:62px;height:58px}}
+</style>
+
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <div class="brand">Paso a Paso <small>Español</small></div>
+  <span class="chip flame" id="chipStreak"></span>
+  <span class="chip" id="chipXP"></span>
+  <button class="chip rev" id="chipRev" data-act="global"></button>
+</div></header>
+<main class="wrap">
+  <section class="path" id="path" aria-label="Course path"></section>
+  <aside class="rail" id="rail"></aside>
+</main>
+<div id="ov"></div>
+
+<script>
+const SECTIONS=[
+ {name:"Base",cefr:"A1",c:"--s1",cd:"--s1d",blurb:"Refresh the core: who you are, food, routines, getting around."},
+ {name:"Conversación",cefr:"A2",c:"--s2",cd:"--s2d",blurb:"Plans, the past two ways, and saying what you like and think."},
+ {name:"Fluidez",cefr:"B1",c:"--s3",cd:"--s3d",blurb:"Work talk, nights out, the subjunctive, and fixing problems on the road."}
+];
+const UNITS=[{"id":1,"sec":0,"title":"Meet people","can":"Introduce yourself, say where you're from and what you do","items":["Me [llamo] Daniel. | My name is Daniel. | I am called Daniel;I'm Daniel | Soy Daniel.;Mi nombre es Daniel.","¿Cómo te [llamas]? | What is your name? | What are you called? | ¿Cuál es tu nombre?;¿Cómo se llama?;¿Cómo se llama usted?;¿Cuál es su nombre?","[Soy] de Colorado. | I am from Colorado. |  | Yo soy de Colorado.","¿De dónde [eres]? | Where are you from? |  | ¿De dónde es usted?;¿Tú de dónde eres?;¿De dónde es?","Mucho [gusto]. | Nice to meet you. | Pleased to meet you;Nice meeting you | Encantado.;Encantada.;Un placer.;Encantado de conocerte.;Encantada de conocerte.","[Somos] amigos del trabajo. | We are friends from work. | We are work friends | Nosotros somos amigos del trabajo.;Somos amigas del trabajo.","Ella [es] ingeniera. | She is an engineer. |  | ","¿A qué te [dedicas]? | What do you do for a living? | What do you do;What do you do for work | ¿En qué trabajas?;¿A qué se dedica?;¿En qué trabaja?;¿De qué trabajas?;¿Qué haces?","[Trabajo] en una fábrica. | I work in a factory. | I work at a factory | Yo trabajo en una fábrica.","[Tengo] veintiocho años. | I am twenty-eight years old. | I am twenty-eight;I am 28;I am 28 years old | Tengo 28 años.","¿Cómo [estás]? | How are you? | How are you doing | ¿Qué tal?;¿Cómo está?;¿Cómo está usted?;¿Qué tal estás?","[Estoy] muy bien, gracias. | I am very well, thank you. | I am very well, thanks;I am very good, thanks;I am very good, thank you | Muy bien, gracias.","Te presento a mi [hermana]. | Let me introduce you to my sister. | This is my sister;Meet my sister;I introduce you to my sister;I would like you to meet my sister | Le presento a mi hermana.","Hasta [luego]. | See you later. | Later;Until later | Nos vemos.;Hasta pronto.;Nos vemos luego."],"tip":"<p>Spanish has two verbs for <em>to be</em>. <b>Ser</b> is for what something <em>is</em>: identity, origin, profession. <b>Estar</b> is for how or where something is right now.</p>\n<div class=\"tbl\"><table><tr><th></th><th>ser</th><th>estar</th></tr>\n<tr><td>yo</td><td><b>soy</b></td><td><b>estoy</b></td></tr><tr><td>tú</td><td><b>eres</b></td><td><b>estás</b></td></tr><tr><td>él / ella / usted</td><td><b>es</b></td><td><b>está</b></td></tr><tr><td>nosotros</td><td><b>somos</b></td><td><b>estamos</b></td></tr><tr><td>ellos / ustedes</td><td><b>son</b></td><td><b>están</b></td></tr></table></div>\n<h4>Names use a reflexive verb</h4><p><em>Me llamo</em> literally means \"I call myself.\" Ask with <em>¿Cómo te llamas?</em> (friendly) or <em>¿Cómo se llama?</em> (polite).</p>\n<h4>Drop the pronoun</h4><p>The verb ending already says who. <em>Soy de Colorado</em> is more natural than <em>Yo soy de Colorado</em>. Use <em>yo</em> for contrast or emphasis.</p>\n<h4>Professions skip \"a\"</h4><p><em>Ella es ingeniera</em>, not <em>es una ingeniera</em>, unless you add an adjective: <em>es una ingeniera excelente</em>.</p>","story":{"title":"En la fiesta","cast":{"T":"Tomás","L":"Lucía"},"lines":[["T","Hola, ¿cómo te llamas?","Hi, what's your name?"],["L","Me llamo Lucía. ¿Y tú?","My name is Lucía. And you?"],["T","Soy Tomás. Soy de Colorado.","I'm Tomás. I'm from Colorado."],["L","¡Qué bien! Yo soy de Sevilla. ¿A qué te dedicas?","Great! I'm from Seville. What do you do?"],["T","Soy ingeniero. Trabajo en una fábrica.","I'm an engineer. I work in a factory."],["L","Yo soy música. Toco la guitarra en un bar.","I'm a musician. I play guitar in a bar."]],"qs":[{"after":3,"q":"Where is Lucía from?","o":["Seville","Colorado","Madrid"],"a":0},{"after":5,"q":"What does Lucía do?","o":["She's a musician","She's an engineer","She works in a factory"],"a":0}]}},
+{"id":2,"sec":0,"title":"Food and drink","can":"Order in a restaurant, ask for recommendations, pay","items":["[Quiero] un café con leche. | I want a coffee with milk. | I would like a coffee with milk;I want a latte | Me gustaría un café con leche.;Quisiera un café con leche.","Me [gustaría] pedir la sopa. | I would like to order the soup. | I would like the soup | Quisiera pedir la sopa.;Me gustaría la sopa.","Para [mí], los tacos. | For me, the tacos. | The tacos for me | Los tacos para mí.","¿Me [trae] la cuenta, por favor? | Can you bring me the check, please? | Could you bring me the check, please;Can you bring me the bill, please;Could you bring me the bill, please;Bring me the check, please | La cuenta, por favor.;¿Me puede traer la cuenta, por favor?;¿Puede traerme la cuenta, por favor?;¿Me traes la cuenta, por favor?","¿Qué me [recomienda]? | What do you recommend? | What would you recommend | ¿Qué me recomiendas?;¿Qué recomienda?;¿Qué recomiendas?","No [como] carne. | I don't eat meat. |  | ","La comida está [rica]. | The food is delicious. | The food is tasty;The food is good | La comida está muy rica.;La comida está deliciosa.;La comida está buena.","¿Tienen mesa para [dos]? | Do you have a table for two? |  | ¿Tienen una mesa para dos?;¿Tiene mesa para dos?;¿Hay mesa para dos?","Una [cerveza], por favor. | A beer, please. | One beer, please | ","[Tengo] hambre. | I am hungry. |  | ","Tenemos [sed]. | We are thirsty. |  | ","¿[Cuánto] cuesta? | How much does it cost? | How much is it;How much | ¿Cuánto es?;¿Cuánto vale?","Sin [hielo], por favor. | Without ice, please. | No ice, please | ","¿Está incluida la [propina]? | Is the tip included? |  | ¿La propina está incluida?"],"tip":"<h4>Tener, not estar, for hunger and thirst</h4><p>Spanish says you <em>have</em> hunger: <b>tengo hambre</b>, <b>tengo sed</b>, <b>tengo frío</b>, <b>tengo prisa</b> (I'm in a hurry).</p>\n<div class=\"tbl\"><table><tr><th>tener</th><th></th></tr><tr><td>yo</td><td><b>tengo</b></td></tr><tr><td>tú</td><td><b>tienes</b></td></tr><tr><td>él / ella / usted</td><td><b>tiene</b></td></tr><tr><td>nosotros</td><td><b>tenemos</b></td></tr><tr><td>ellos / ustedes</td><td><b>tienen</b></td></tr></table></div>\n<h4>Ordering, from blunt to polite</h4><p><b>Quiero…</b> is normal in Spain and fine almost everywhere. <b>Me gustaría…</b> or <b>¿Me pone…?</b> (Spain) / <b>¿Me trae…?</b> (Latin America) sound softer.</p>\n<h4>Usted with servers</h4><p>Use the <em>usted</em> form with staff you don't know: <em>¿Qué me recomienda?</em> (not <em>recomiendas</em>). It's the same ending as él/ella.</p>","story":{"title":"En el restaurante","cast":{"M":"Mesero","C":"Clara"},"lines":[["M","Buenas noches. ¿Mesa para cuántos?","Good evening. Table for how many?"],["C","Para dos, por favor.","For two, please."],["M","Aquí tienen la carta. ¿Qué van a tomar?","Here's the menu. What will you have to drink?"],["C","Una cerveza y un agua sin gas.","A beer and a still water."],["M","¿Y para comer?","And to eat?"],["C","¿Qué nos recomienda? Yo no como carne.","What do you recommend? I don't eat meat."],["M","Las enchiladas de queso están muy ricas.","The cheese enchiladas are delicious."],["C","Perfecto. Y luego la cuenta, por favor.","Perfect. And the check afterwards, please."]],"qs":[{"after":3,"q":"What do they order to drink?","o":["A beer and a still water","Two beers","A coffee and a water"],"a":0},{"after":7,"q":"What does the waiter recommend?","o":["Cheese enchiladas","Beef tacos","The soup"],"a":0}]}},
+{"id":3,"sec":0,"title":"Daily routine","can":"Describe your day, tell time, use reflexive verbs","items":["Me [levanto] a las seis. | I get up at six. | I wake up at six;I get up at 6;I get up at six o'clock | Yo me levanto a las seis.;Me levanto a las 6.","Me [ducho] por la mañana. | I shower in the morning. | I take a shower in the morning | Me ducho en la mañana.;Me baño por la mañana.;Me baño en la mañana.","¿A qué hora te [acuestas]? | What time do you go to bed? | When do you go to bed | ¿A qué hora se acuesta?;¿Cuándo te acuestas?","[Desayuno] café y pan tostado. | I have coffee and toast for breakfast. | For breakfast I have coffee and toast;I eat coffee and toast for breakfast | Desayuno café con pan tostado.;Desayuno café y tostadas.","Salgo de [casa] a las siete y media. | I leave home at seven thirty. | I leave the house at seven thirty;I leave home at half past seven;I leave the house at half past seven;I leave home at 7:30 | Salgo de casa a las 7:30.","[Son] las tres y cuarto. | It is a quarter past three. | It is three fifteen;It is 3:15 | Son las tres y quince.;Son las 3:15.","Es la [una] en punto. | It is one o'clock sharp. | It is exactly one o'clock;It is one o'clock | ","Siempre me [acuesto] tarde. | I always go to bed late. |  | Me acuesto siempre tarde.","Nos [vestimos] rápido. | We get dressed quickly. | We get dressed fast;We dress quickly | Nos vestimos rápidamente.","Los fines de semana [duermo] más. | On weekends I sleep more. | I sleep more on weekends;On the weekends I sleep more | Duermo más los fines de semana.","Ella se [cepilla] los dientes. | She brushes her teeth. |  | Ella se lava los dientes.","[Vuelvo] a casa a las cinco. | I come home at five. | I return home at five;I get home at five;I go back home at five | Regreso a casa a las cinco.;Llego a casa a las cinco.","Normalmente [ceno] a las ocho. | I normally have dinner at eight. | I usually have dinner at eight;I usually eat dinner at eight;Normally I have dinner at eight | Ceno normalmente a las ocho.;Generalmente ceno a las ocho.;Normalmente ceno a las 8."],"tip":"<h4>Reflexive verbs</h4><p>When you do the action to yourself, add a pronoun before the verb: <em>levantarse</em> (to get up) becomes <b>me levanto</b>.</p>\n<div class=\"tbl\"><table><tr><th></th><th>pronoun</th><th>levantarse</th></tr><tr><td>yo</td><td><b>me</b></td><td>me levanto</td></tr><tr><td>tú</td><td><b>te</b></td><td>te levantas</td></tr><tr><td>él / ella</td><td><b>se</b></td><td>se levanta</td></tr><tr><td>nosotros</td><td><b>nos</b></td><td>nos levantamos</td></tr><tr><td>ellos</td><td><b>se</b></td><td>se levantan</td></tr></table></div>\n<h4>Stem changes</h4><p>Some verbs change their vowel in every form except nosotros (and vosotros): <b>o → ue</b> (acostarse → me acuesto, volver → vuelvo, dormir → duermo) and <b>e → i</b> (vestirse → me visto, but nos vestimos).</p>\n<h4>Telling time</h4><p><b>Es la una</b> (one o'clock is singular), <b>son las dos, son las tres</b>… Add <em>y cuarto</em> (:15), <em>y media</em> (:30), <em>menos cuarto</em> (:45 of the next hour). \"At\" a time is <b>a las…</b>.</p>","story":{"title":"Un día normal","cast":{"M":"Marta"},"lines":[["M","Me levanto a las seis, pero no me gusta nada.","I get up at six, but I don't like it at all."],["M","Me ducho, me visto y desayuno café con pan tostado.","I shower, get dressed and have coffee with toast."],["M","Salgo de casa a las siete y cuarto.","I leave home at a quarter past seven."],["M","Trabajo hasta las cinco y vuelvo a casa en bici.","I work until five and come home by bike."],["M","Por la noche ceno con mi compañero de piso.","In the evening I have dinner with my roommate."],["M","Siempre me acuesto tarde porque leo mucho.","I always go to bed late because I read a lot."]],"qs":[{"after":2,"q":"When does Marta leave home?","o":["7:15","6:00","7:30"],"a":0},{"after":5,"q":"Why does she go to bed late?","o":["She reads a lot","She works late","She watches TV"],"a":0}]}},
+{"id":4,"sec":0,"title":"Getting around","can":"Ask for and follow directions, buy tickets","items":["¿Dónde [está] la estación? | Where is the station? |  | ","El baño está a la [derecha]. | The bathroom is on the right. | The bathroom is to the right;The restroom is on the right | El baño está a mano derecha.","Siga [recto] dos cuadras. | Go straight two blocks. | Go straight for two blocks;Keep going straight for two blocks;Continue straight two blocks | Siga derecho dos cuadras.;Sigue recto dos cuadras.;Siga todo recto dos cuadras.;Siga recto dos calles.","Gire a la [izquierda] en el semáforo. | Turn left at the traffic light. | Turn left at the light;Turn to the left at the traffic light | Doble a la izquierda en el semáforo.;Gira a la izquierda en el semáforo.;Dobla a la izquierda en el semáforo.","[Voy] al centro en autobús. | I am going downtown by bus. | I go downtown by bus;I am going to the center by bus;I go to the center by bus | Voy al centro en bus.;Voy al centro en camión.","¿[Está] lejos de aquí? | Is it far from here? |  | ¿Queda lejos de aquí?","Está [cerca] del museo. | It is near the museum. | It is close to the museum | Queda cerca del museo.","¿Cómo [llego] al aeropuerto? | How do I get to the airport? |  | ¿Cómo se llega al aeropuerto?;¿Cómo puedo llegar al aeropuerto?;¿Cómo voy al aeropuerto?","Estamos [perdidos]. | We are lost. |  | Estamos perdidas.","La farmacia está [enfrente] del banco. | The pharmacy is across from the bank. | The pharmacy is opposite the bank;The pharmacy is in front of the bank | La farmacia está frente al banco.;La farmacia está en frente del banco.","Un [billete] de ida y vuelta, por favor. | A round-trip ticket, please. | One round-trip ticket, please;A return ticket, please | Un boleto de ida y vuelta, por favor.","¿A qué hora [sale] el tren? | What time does the train leave? | When does the train leave;What time does the train depart | ¿Cuándo sale el tren?","[Vamos] a pie. | We are going on foot. | Let us walk;Let us go on foot;We are walking | Vamos caminando.;Vamos andando."],"tip":"<h4>Estar for location</h4><p>The location of people and things takes <b>estar</b>, even for things that never move: <em>Madrid está en España</em>. Where an event takes place uses <b>ser</b>: <em>la fiesta es en mi casa</em>.</p>\n<h4>Ir (to go) is irregular</h4><div class=\"tbl\"><table><tr><td>yo</td><td><b>voy</b></td><td>nosotros</td><td><b>vamos</b></td></tr><tr><td>tú</td><td><b>vas</b></td><td>ellos</td><td><b>van</b></td></tr><tr><td>él / ella</td><td><b>va</b></td><td></td><td></td></tr></table></div>\n<h4>Contractions</h4><p><b>a + el = al</b> (voy al centro), <b>de + el = del</b> (cerca del museo). Only with <em>el</em>, never with <em>la</em>.</p>\n<h4>Regional words</h4><p>Latin America: <em>cuadra</em> (block), <em>boleto</em> (ticket), <em>doblar</em> (turn), <em>derecho</em> (straight). Spain: <em>calle</em> or <em>manzana</em>, <em>billete</em>, <em>girar</em>, <em>recto</em> (some Latin American countries also say <em>recto</em>). Directions to strangers use the polite command: <b>siga, gire, doble</b>.</p>","story":{"title":"¿Dónde está el museo?","cast":{"T":"Turista","S":"Señor"},"lines":[["T","Perdone, ¿dónde está el Museo de Arte?","Excuse me, where is the Art Museum?"],["S","Está un poco lejos. ¿Va a pie?","It's a bit far. Are you walking?"],["T","Sí, voy a pie.","Yes, I'm walking."],["S","Siga recto tres cuadras y gire a la derecha en el semáforo.","Go straight three blocks and turn right at the light."],["S","El museo está enfrente de una farmacia grande.","The museum is across from a big pharmacy."],["T","¡Muchas gracias!","Thanks a lot!"]],"qs":[{"after":3,"q":"How many blocks straight?","o":["Three","Two","Five"],"a":0},{"after":5,"q":"What is across from the museum?","o":["A big pharmacy","A bank","The station"],"a":0}]}},
+{"id":5,"sec":1,"title":"Making plans","can":"Talk about the future, make and decline plans","items":["[Voy] a viajar en diciembre. | I am going to travel in December. | I will travel in December | En diciembre voy a viajar.;Viajaré en diciembre.","¿Qué vas a [hacer] este fin de semana? | What are you going to do this weekend? | What are you doing this weekend;What will you do this weekend | ¿Qué va a hacer este fin de semana?;¿Qué haces este fin de semana?","[Tengo] que trabajar el sábado. | I have to work on Saturday. | I have to work Saturday;I must work on Saturday | El sábado tengo que trabajar.","¿[Quedamos] a las ocho? | Shall we meet at eight? | Should we meet at eight;Want to meet at eight;Shall we meet at 8 | ¿Nos vemos a las ocho?;¿Quedamos a las 8?","Vamos a [ver] una película. | We are going to watch a movie. | We are going to see a movie;We are going to watch a film;We are going to see a film | ","No [puedo] ir, lo siento. | I can't go, I'm sorry. | I cannot go, sorry;I can't go, sorry;I am not able to go, I am sorry | Lo siento, no puedo ir.","¿Te [apetece] tomar algo? | Do you feel like having a drink? | Do you want to grab a drink;Do you fancy a drink;Do you feel like getting a drink;Do you want to get a drink | ¿Quieres tomar algo?;¿Te apetece ir a tomar algo?;¿Quieres ir a tomar algo?;¿Se te antoja tomar algo?","Mañana va a [llover]. | It is going to rain tomorrow. | Tomorrow it is going to rain;It will rain tomorrow | Va a llover mañana.;Mañana lloverá.;Lloverá mañana.","Pienso [visitar] a mis padres. | I plan to visit my parents. | I am planning to visit my parents;I am thinking of visiting my parents | Planeo visitar a mis padres.;Tengo pensado visitar a mis padres.","¿Estás [libre] el viernes? | Are you free on Friday? | Are you free Friday | ¿Está libre el viernes?","Tenemos que [salir] temprano. | We have to leave early. | We must leave early;We need to leave early | Tenemos que salir pronto.;Debemos salir temprano.","Hay que [reservar] antes. | You have to book in advance. | You need to book ahead;You have to reserve beforehand;You have to book beforehand;It is necessary to book in advance | Hay que reservar con antelación.;Hay que reservar con anticipación.;Tienes que reservar antes.","[Acabo] de llegar. | I just arrived. | I have just arrived;I just got here | Recién llegué."],"tip":"<h4>The easy future: ir a + infinitive</h4><p>Conjugate <em>ir</em>, add <b>a</b>, then the base verb: <em>voy a viajar</em>, <em>va a llover</em>, <em>vamos a ver</em>. This is how most people talk about plans day to day.</p>\n<h4>Verb + infinitive patterns</h4><div class=\"tbl\"><table><tr><th>form</th><th>meaning</th></tr><tr><td><b>tener que</b> + inf.</td><td>someone has to (tengo que trabajar)</td></tr><tr><td><b>hay que</b> + inf.</td><td>one has to, in general (hay que reservar)</td></tr><tr><td><b>acabar de</b> + inf.</td><td>to have just done (acabo de llegar)</td></tr></table></div>\n<h4>Meeting up</h4><p>In Spain <b>quedar</b> means to meet up or arrange to meet: <em>¿Quedamos a las ocho?</em> Don't confuse it with <b>quedarse</b>, to stay. <em>¿Te apetece…?</em> (do you feel like…?) is the casual invitation; in Latin America you'll hear <em>¿Quieres…?</em> or <em>¿Se te antoja…?</em> (Mexico).</p>","story":{"title":"Planes para el sábado","cast":{"A":"Ana","L":"Leo"},"lines":[["A","¿Qué vas a hacer el sábado?","What are you going to do on Saturday?"],["L","Por la mañana tengo que trabajar. ¿Por qué?","In the morning I have to work. Why?"],["A","Vamos a ir al lago. ¿Te apetece?","We're going to the lake. Do you feel like it?"],["L","¡Sí! Pero no puedo salir antes de las dos.","Yes! But I can't leave before two."],["A","Vale, quedamos a las dos y media en mi casa.","OK, let's meet at two-thirty at my place."],["L","Perfecto. Yo llevo la comida.","Perfect. I'll bring the food."]],"qs":[{"after":1,"q":"Why is Leo busy in the morning?","o":["He has to work","He is sick","He has no car"],"a":0},{"after":5,"q":"Where do they meet?","o":["At Ana's place","At the lake","At the station"],"a":0}]}},
+{"id":6,"sec":1,"title":"Last weekend","can":"Tell what happened using the preterite","items":["Ayer [trabajé] diez horas. | Yesterday I worked ten hours. | I worked ten hours yesterday;Yesterday I worked for ten hours;I worked for ten hours yesterday | Trabajé diez horas ayer.","¿Qué [hiciste] el fin de semana? | What did you do on the weekend? | What did you do over the weekend;What did you do this weekend;What did you do last weekend;What did you do at the weekend | ¿Qué hizo el fin de semana?;¿Qué hiciste este fin de semana?","[Fuimos] a la playa. | We went to the beach. |  | ","[Comí] demasiado. | I ate too much. |  | ","Ella no [vino] a la fiesta. | She didn't come to the party. |  | ","[Tuve] que esperar una hora. | I had to wait an hour. | I had to wait for an hour;I had to wait one hour | ","¿[Viste] el partido anoche? | Did you see the game last night? | Did you watch the game last night;Did you see the match last night;Did you watch the match last night | ","Anoche [dormí] muy mal. | Last night I slept very badly. | I slept very badly last night;I slept really badly last night;I slept very poorly last night | Dormí muy mal anoche.","Me [quedé] en casa. | I stayed at home. | I stayed home | ","El año pasado [estuve] en México. | Last year I was in Mexico. | I was in Mexico last year | Estuve en México el año pasado.","[Llegamos] tarde al concierto. | We arrived late to the concert. | We got to the concert late;We arrived at the concert late;We were late to the concert | Llegamos al concierto tarde.","¿Quién te lo [dijo]? | Who told you? | Who told you that;Who told it to you | ¿Quién te dijo eso?;¿Quién te dijo?","[Pude] terminar el proyecto. | I managed to finish the project. | I was able to finish the project;I could finish the project | Logré terminar el proyecto.;Conseguí terminar el proyecto."],"tip":"<h4>The preterite: finished events</h4><p>Use it for things that happened and ended at a clear point: <em>ayer, anoche, el sábado, el año pasado</em>.</p>\n<div class=\"tbl\"><table><tr><th></th><th>-ar (trabajar)</th><th>-er / -ir (comer)</th></tr><tr><td>yo</td><td>trabaj<b>é</b></td><td>com<b>í</b></td></tr><tr><td>tú</td><td>trabaj<b>aste</b></td><td>com<b>iste</b></td></tr><tr><td>él / ella</td><td>trabaj<b>ó</b></td><td>com<b>ió</b></td></tr><tr><td>nosotros</td><td>trabaj<b>amos</b></td><td>com<b>imos</b></td></tr><tr><td>ellos</td><td>trabaj<b>aron</b></td><td>com<b>ieron</b></td></tr></table></div>\n<h4>The irregulars you'll use daily</h4><p>No accents on these: <b>ser / ir → fui, fue, fuimos, fueron</b> (same form, context decides) · <b>hacer → hice, hizo</b> · <b>tener → tuve</b> · <b>estar → estuve</b> · <b>poder → pude</b> · <b>venir → vine</b> · <b>decir → dije</b>.</p>","story":{"title":"Un fin de semana desastroso","cast":{"C":"Carlos","S":"Sofía"},"lines":[["C","¿Qué tal el fin de semana?","How was the weekend?"],["S","Fatal. El sábado fuimos a la playa y llovió todo el día.","Awful. On Saturday we went to the beach and it rained all day."],["C","¡Qué mala suerte! ¿Y el domingo?","What bad luck! And Sunday?"],["S","El domingo perdí las llaves y tuve que esperar dos horas al cerrajero.","On Sunday I lost my keys and had to wait two hours for the locksmith."],["C","Yo me quedé en casa y vi tres películas.","I stayed home and watched three movies."],["S","La próxima vez, ¡me quedo contigo!","Next time, I'm staying with you!"]],"qs":[{"after":1,"q":"What was the weather like on Saturday?","o":["It rained all day","Sunny","It snowed"],"a":0},{"after":4,"q":"What did Carlos do?","o":["Watched movies at home","Went to the beach","Lost his keys"],"a":0}]}},
+{"id":7,"sec":1,"title":"When I was a kid","can":"Describe the past and habits using the imperfect","items":["Cuando era [niño], vivía en el campo. | When I was a child, I lived in the countryside. | When I was a kid, I lived in the country;When I was a child, I used to live in the countryside;When I was a kid, I lived in the countryside;When I was a child, I lived in the country | Cuando era niña, vivía en el campo.;De niño, vivía en el campo.;Cuando era pequeño, vivía en el campo.;Vivía en el campo cuando era niño.","[Jugaba] al fútbol todos los días. | I used to play soccer every day. | I played soccer every day;I used to play football every day;I played football every day | Jugaba fútbol todos los días.","Mi abuela [cocinaba] muy bien. | My grandmother cooked very well. | My grandmother used to cook very well;My grandma cooked really well;My grandma used to cook very well;My grandmother cooked really well | ","[Hacía] mucho frío. | It was very cold. | It was really cold | ","[Eran] las once de la noche. | It was eleven at night. | It was eleven o'clock at night;It was 11 at night | Eran las 11 de la noche.","Antes [tenía] el pelo largo. | I used to have long hair. | I had long hair before;Before I had long hair | Antes llevaba el pelo largo.;Tenía el pelo largo antes.;Antes tenía pelo largo.","¿Dónde [vivías] de pequeño? | Where did you live as a kid? | Where did you live when you were little;Where did you live as a child;Where did you live when you were small | ¿Dónde vivías de niño?;¿Dónde vivías cuando eras pequeño?;¿Dónde vivías de pequeña?;¿Dónde vivías cuando eras niño?","[Íbamos] a la playa cada verano. | We used to go to the beach every summer. | We went to the beach every summer | Íbamos a la playa todos los veranos.","Mientras [cocinaba], sonó el teléfono. | While I was cooking, the phone rang. | The phone rang while I was cooking | Sonó el teléfono mientras cocinaba.;Mientras estaba cocinando, sonó el teléfono.","Estaba [cansado], así que me fui. | I was tired, so I left. | I was tired so I went | Estaba cansada, así que me fui.;Estaba cansado, entonces me fui.","No me [gustaban] las verduras. | I didn't like vegetables. | I did not use to like vegetables;I used to not like vegetables | ","Mi padre [trabajaba] en una mina. | My father worked in a mine. | My dad worked in a mine;My father used to work in a mine;My dad used to work in a mine | "],"tip":"<h4>Imperfect: the background</h4><p>Use it for habits (<em>used to</em>), descriptions, time and weather in the past, and actions that were in progress (<em>was doing</em>).</p>\n<div class=\"tbl\"><table><tr><th></th><th>-ar (jugar)</th><th>-er / -ir (vivir)</th></tr><tr><td>yo</td><td>jug<b>aba</b></td><td>viv<b>ía</b></td></tr><tr><td>tú</td><td>jug<b>abas</b></td><td>viv<b>ías</b></td></tr><tr><td>él / ella</td><td>jug<b>aba</b></td><td>viv<b>ía</b></td></tr><tr><td>nosotros</td><td>jug<b>ábamos</b></td><td>viv<b>íamos</b></td></tr><tr><td>ellos</td><td>jug<b>aban</b></td><td>viv<b>ían</b></td></tr></table></div>\n<p>Only three irregulars: <b>ser → era</b>, <b>ir → iba</b>, <b>ver → veía</b>.</p>\n<h4>Imperfect vs preterite</h4><p>Think of a film: the imperfect is the scenery and what was already going on; the preterite is what <em>happens</em> and moves the plot. <em>Mientras <b>cocinaba</b>, <b>sonó</b> el teléfono.</em> I was cooking (background), the phone rang (event).</p>","story":{"title":"Mi pueblo","cast":{"A":"Abuelo","N":"Nieta"},"lines":[["A","Cuando yo era niño, vivíamos en un pueblo pequeño.","When I was a boy, we lived in a small village."],["N","¿Y qué hacías todos los días?","And what did you do every day?"],["A","Por la mañana ayudaba a mi padre con las vacas.","In the morning I helped my father with the cows."],["A","Por la tarde jugaba al fútbol con mis primos en la plaza.","In the afternoon I played soccer with my cousins in the square."],["N","¿No había televisión?","Wasn't there any television?"],["A","No. Pero un día llegó la primera tele al bar, y todo el pueblo fue a verla.","No. But one day the first TV arrived at the bar, and the whole village went to see it."]],"qs":[{"after":2,"q":"What did he do in the mornings?","o":["Helped his father with the cows","Played soccer","Went to school"],"a":0},{"after":5,"q":"Which verb is a single event (preterite)?","o":["llegó","había","jugaba"],"a":0}]}},
+{"id":8,"sec":1,"title":"Likes and opinions","can":"Say what you like, love, and think","items":["Me [encanta] esta canción. | I love this song. |  | ","No me [gustan] los lunes. | I don't like Mondays. |  | ","¿Te [gusta] bailar? | Do you like to dance? | Do you like dancing | ¿Le gusta bailar?","A mi hermano le [gusta] el jazz. | My brother likes jazz. |  | ","Nos [interesa] la historia. | We are interested in history. | History interests us | Estamos interesados en la historia.","Me [parece] una buena idea. | It seems like a good idea to me. | I think it is a good idea;It seems like a good idea;That seems like a good idea to me;It seems a good idea to me | Me parece buena idea.;Creo que es una buena idea.","[Creo] que tienes razón. | I think you are right. | I believe you are right | Creo que tiene razón.","En mi [opinión], es demasiado caro. | In my opinion, it is too expensive. |  | En mi opinión, es demasiado cara.","Me [molesta] el ruido. | The noise bothers me. | Noise bothers me | ","¿Qué te [parece] el plan? | What do you think of the plan? | What do you think about the plan | ¿Qué piensas del plan?;¿Qué opinas del plan?;¿Qué le parece el plan?","Estoy de [acuerdo] contigo. | I agree with you. |  | Estoy de acuerdo con usted.","Me [duele] la cabeza. | My head hurts. | I have a headache | Tengo dolor de cabeza.","Prefiero el [campo] a la ciudad. | I prefer the countryside to the city. | I prefer the country to the city | ","A mí [también]. | Me too. | Me as well;So do I | Yo también.","A mí [tampoco]. | Me neither. | Neither do I;Nor do I | Yo tampoco."],"tip":"<h4>Gustar works backwards</h4><p><em>Me gusta el jazz</em> literally means \"jazz pleases me.\" The thing you like is the subject, so the verb agrees with <em>it</em>, not with you.</p>\n<div class=\"tbl\"><table><tr><th>one thing / a verb</th><th>several things</th></tr><tr><td>me <b>gusta</b> la música</td><td>me <b>gustan</b> los lunes</td></tr><tr><td>te <b>gusta</b> bailar</td><td>te <b>gustan</b> las verduras</td></tr></table></div>\n<p>Who is pleased: <b>me, te, le, nos, les</b>. Add <em>a mí, a ti, a mi hermano</em> for emphasis or clarity.</p>\n<h4>Same pattern</h4><p><b>encantar</b> (love), <b>interesar</b>, <b>molestar</b> (bother), <b>doler</b> (hurt), <b>parecer</b> (seem). <em>Me duele la cabeza</em> = my head hurts me.</p>\n<h4>Agreeing</h4><p>After a positive: <b>a mí también</b>. After a negative: <b>a mí tampoco</b>. Those answer gustar-type verbs; with ordinary verbs say <b>yo también / yo tampoco</b> (<em>Trabajo mucho. —Yo también.</em>).</p>","story":{"title":"¿Qué música te gusta?","cast":{"D":"Diego","P":"Paula"},"lines":[["D","¿Qué tipo de música te gusta?","What kind of music do you like?"],["P","Me encanta la música electrónica, sobre todo el house.","I love electronic music, especially house."],["D","A mí también. Pero no me gusta cuando está muy alta.","Me too. But I don't like it when it's really loud."],["P","¿En serio? A mí me parece mejor así.","Seriously? To me it sounds better that way."],["D","Bueno, a mi novia le molesta el ruido, así que vamos a conciertos pequeños.","Well, the noise bothers my girlfriend, so we go to small shows."],["P","Pues el viernes hay uno en un bar pequeño. ¿Te apetece?","Well, on Friday there's one at a small bar. Do you feel like it?"]],"qs":[{"after":1,"q":"What does Paula love?","o":["Electronic music","Jazz","Rock"],"a":0},{"after":4,"q":"Who is bothered by the noise?","o":["Diego's girlfriend","Paula","Diego's brother"],"a":0}]}},
+{"id":9,"sec":2,"title":"At work","can":"Handle meetings, requests, and problems on the job","items":["Tengo una [reunión] a las diez. | I have a meeting at ten. |  | ","¿Puedes [enviarme] el informe? | Can you send me the report? | Could you send me the report | ¿Me puedes enviar el informe?;¿Me envías el informe?;¿Puede enviarme el informe?;¿Puedes mandarme el informe?;¿Me puedes mandar el informe?;¿Puedes enviarme el reporte?","El [plazo] es el viernes. | The deadline is Friday. | The deadline is on Friday | La fecha límite es el viernes.","La máquina no [funciona]. | The machine doesn't work. | The machine is not working | La máquina no está funcionando.;La máquina no sirve.","[Estamos] probando un nuevo diseño. | We are testing a new design. |  | Estamos probando un diseño nuevo.","Hay que [arreglar] este error. | This error needs to be fixed. | We have to fix this error;We need to fix this bug;This bug needs to be fixed;We have to fix this bug;You have to fix this error | Tenemos que arreglar este error.;Hay que corregir este error.","Mi [jefe] está de vacaciones. | My boss is on vacation. | My boss is on holiday | Mi jefa está de vacaciones.","[Llevo] tres años en esta empresa. | I have been at this company for three years. | I have been with this company for three years;I have worked at this company for three years | Llevo tres años trabajando en esta empresa.;Hace tres años que estoy en esta empresa.;Trabajo en esta empresa desde hace tres años.","¿Me [ayudas] con esto? | Can you help me with this? | Will you help me with this;Could you help me with this | ¿Puedes ayudarme con esto?;¿Me puedes ayudar con esto?;¿Me ayuda con esto?","Estoy muy [ocupado] hoy. | I am very busy today. | I am really busy today | Estoy muy ocupada hoy.;Hoy estoy muy ocupado.;Hoy estoy muy ocupada.","Vamos a [mejorar] el proceso. | We are going to improve the process. |  | ","[Trabajo] desde casa los lunes. | I work from home on Mondays. | On Mondays I work from home | Los lunes trabajo desde casa.;Trabajo en casa los lunes.","La línea de [producción] está parada. | The production line is stopped. | The production line is down;The production line has stopped | La línea de producción está detenida.","[Necesito] más datos. | I need more data. |  | "],"tip":"<h4>Right now: estar + gerund</h4><p>For something in progress, use <b>estar</b> + <b>-ando</b> (-ar verbs) or <b>-iendo</b> (-er/-ir): <em>estamos probando</em>, <em>está escribiendo</em>. Spanish uses this less than English; <em>trabajo desde casa</em> covers \"I'm working from home\" as a habit.</p>\n<h4>How long: llevar + time</h4><p><b>Llevo tres años en esta empresa</b> = I've been at this company for three years. Add a gerund for an activity: <em>llevo una hora esperando</em>.</p>\n<h4>Asking colleagues</h4><div class=\"tbl\"><table><tr><th>phrase</th><th>tone</th></tr><tr><td>¿Me ayudas con esto?</td><td>casual, present tense as a request</td></tr><tr><td>¿Puedes enviarme…?</td><td>neutral</td></tr><tr><td>¿Podrías…? / ¿Le importaría…?</td><td>polite, to a boss or client</td></tr></table></div>\n<p>Object pronouns can attach to an infinitive or go before the verb: <em>puedes enviar<b>me</b></em> = <em><b>me</b> puedes enviar</em>.</p>","story":{"title":"Problema en la línea","cast":{"J":"Jefa","R":"Raúl"},"lines":[["J","Raúl, ¿por qué está parada la línea?","Raúl, why is the line stopped?"],["R","La máquina tres no funciona. Estamos revisando los sensores.","Machine three isn't working. We're checking the sensors."],["J","¿Cuánto tiempo lleva parada?","How long has it been stopped?"],["R","Unos veinte minutos. Creo que es un cable suelto.","About twenty minutes. I think it's a loose cable."],["J","Vale. Hay que arreglarlo antes de la reunión de las diez.","OK. It has to be fixed before the ten o'clock meeting."],["R","Sin problema. Le envío el informe en cuanto terminemos.","No problem. I'll send you the report as soon as we're done."]],"qs":[{"after":3,"q":"What does Raúl think is wrong?","o":["A loose cable","Bad software","No power"],"a":0},{"after":3,"q":"How long has the line been stopped?","o":["About 20 minutes","Two hours","Ten minutes"],"a":0}]}},
+{"id":10,"sec":2,"title":"Music and nights out","can":"Talk about shows, DJs, tickets, and going out","items":["¿A qué hora [empieza] el concierto? | What time does the concert start? | When does the concert start;What time does the concert begin | ¿A qué hora comienza el concierto?;¿Cuándo empieza el concierto?","El DJ [pinchó] toda la noche. | The DJ played all night. | The DJ spun all night;The DJ played records all night | El DJ tocó toda la noche.;El DJ puso música toda la noche.","¡Vamos a [bailar]! | Let's dance! | We are going to dance | ¡A bailar!","La entrada [cuesta] veinte euros. | The ticket costs twenty euros. | Entry costs twenty euros;The ticket is twenty euros;Admission costs twenty euros;The ticket costs 20 euros | La entrada vale veinte euros.;La entrada cuesta 20 euros.;El boleto cuesta veinte euros.","¿Hay [cola] para entrar? | Is there a line to get in? | Is there a queue to get in;Is there a line to go in | ¿Hay fila para entrar?","El [sonido] estaba increíble. | The sound was incredible. | The sound was amazing | El sonido era increíble.","[Salimos] hasta las cinco de la mañana. | We went out until five in the morning. | We stayed out until five in the morning;We went out until 5 in the morning | Estuvimos fuera hasta las cinco de la mañana.;Salimos hasta las 5 de la mañana.","¿[Conoces] este grupo? | Do you know this band? | Do you know this group | ¿Conoces esta banda?;¿Conoces a este grupo?;¿Conoce este grupo?","Sube el [volumen]. | Turn up the volume. | Turn the volume up;Turn it up | Súbele el volumen.;Suba el volumen.;Súbelo.","Estoy [agotado], me voy a casa. | I'm exhausted, I'm going home. | I am exhausted, I am heading home | Estoy agotada, me voy a casa.","Esta canción me [pone] de buen humor. | This song puts me in a good mood. |  | ","Hacemos una [fiesta] en el campo. | We're having a party in the countryside. | We are throwing a party in the countryside;We are having a party in the country | Estamos haciendo una fiesta en el campo.;Organizamos una fiesta en el campo.","¿Quién [toca] esta noche? | Who is playing tonight? |  | "],"tip":"<h4>Playing music: three verbs</h4><div class=\"tbl\"><table><tr><th>verb</th><th>use</th></tr><tr><td><b>tocar</b></td><td>play an instrument, a band plays: <em>¿Quién toca esta noche?</em></td></tr><tr><td><b>poner</b> / <b>pinchar</b></td><td>put on music; <em>pinchar</em> is DJing in Spain (Latin America: <em>tocar</em> or <em>poner música</em>)</td></tr><tr><td><b>jugar</b></td><td>games and sports only</td></tr></table></div>\n<h4>Conocer vs saber</h4><p><b>conocer</b> = be familiar with people, places, bands (<em>¿Conoces este grupo?</em>). <b>saber</b> = know facts or how to do something (<em>¿Sabes a qué hora empieza?</em>, <em>sé bailar</em>).</p>\n<h4>Turning it up</h4><p><em>Sube el volumen</em> works everywhere; <em>súbele</em> is the Mexican and Central American way to say it.</p><h4>Estar for how something was</h4><p><em>El sonido <b>estaba</b> increíble</em> describes how it came across that night. <em>Estar</em> + adjective is the natural way to react to an experience.</p>\n<p>Regional: <em>cola</em> (Spain) / <em>fila</em> (Latin America) for a line; <em>la entrada</em> or <em>el boleto</em> for a ticket.</p>","story":{"title":"Noche de fiesta","cast":{"M":"Mía","A":"Álex"},"lines":[["M","¿Quién toca esta noche?","Who's playing tonight?"],["A","Un DJ de Berlín. Dicen que pincha un house muy profundo.","A DJ from Berlin. They say he plays really deep house."],["M","¿Cuánto cuesta la entrada?","How much is the ticket?"],["A","Quince euros antes de la una. Después, veinte.","Fifteen euros before one. After that, twenty."],["M","Pues vamos pronto, que siempre hay mucha cola.","Then let's go early, there's always a long line."],["A","Vale, pero no me quedo hasta las seis como la última vez.","OK, but I'm not staying until six like last time."]],"qs":[{"after":3,"q":"How much is entry before 1 a.m.?","o":["15 euros","20 euros","10 euros"],"a":0},{"after":4,"q":"Why does Mía want to go early?","o":["There's always a long line","The DJ starts early","The club closes at one"],"a":0}]}},
+{"id":11,"sec":2,"title":"Wishes and doubts","can":"Use the present subjunctive for wishes, advice, and doubt","items":["Quiero que [vengas] conmigo. | I want you to come with me. |  | Quiero que venga conmigo.","Espero que [estés] bien. | I hope you are well. | I hope you are doing well | Espero que esté bien.;Espero que te encuentres bien.","Ojalá no [llueva] mañana. | I hope it doesn't rain tomorrow. | Hopefully it won't rain tomorrow;Hopefully it doesn't rain tomorrow;I hope it won't rain tomorrow | Ojalá que no llueva mañana.;Espero que no llueva mañana.","Es importante que [practiques] cada día. | It is important that you practice every day. | It is important for you to practice every day | Es importante que practiques todos los días.;Es importante que practique cada día.","No creo que [sea] tan difícil. | I don't think it's that hard. | I don't think it is so difficult;I don't think it is so hard;I don't think it is that difficult | ","Cuando [llegues], llámame. | When you arrive, call me. | Call me when you arrive;Call me when you get there;When you get there, call me | Llámame cuando llegues.;Cuando llegue, llámeme.","Me alegra que [estés] aquí. | I'm glad you are here. | I am glad that you are here;I am happy you are here | Me alegro de que estés aquí.;Me alegra que esté aquí.","Te pido que me [escuches]. | I am asking you to listen to me. | I ask you to listen to me | Le pido que me escuche.","Es mejor que nos [vayamos]. | It is better that we leave. | It is better if we leave;We had better go;It is better that we go;We had better leave | Es mejor que salgamos.","Dudo que [tenga] tiempo. | I doubt he has time. | I doubt she has time;I doubt that he has time;I doubt I have time;I doubt you have time | Dudo que él tenga tiempo.","Busco un piso que [tenga] terraza. | I'm looking for an apartment that has a terrace. | I am looking for an apartment with a terrace;I am looking for a flat that has a terrace;I am looking for a flat with a terrace | Busco un apartamento que tenga terraza.;Busco un departamento que tenga terraza.;Estoy buscando un piso que tenga terraza.","Para que lo [sepas], ya terminé. | Just so you know, I already finished. | So you know, I am already done;Just so you know, I have already finished;Just so you know, I am already done | Para que lo sepas, ya he terminado.","¡Que te [vaya] bien! | Hope it goes well for you! | Good luck;I hope it goes well;Hope it goes well | ¡Que le vaya bien!"],"tip":"<h4>When to use it</h4><p>The subjunctive appears after <b>que</b> when the first part expresses something other than plain fact. A common memory aid is <b>WEIRDO</b>: <b>W</b>ishes (quiero que), <b>E</b>motions (me alegra que), <b>I</b>mpersonal opinions (es importante que), <b>R</b>ecommendations (te pido que), <b>D</b>oubt and denial (dudo que, no creo que), <b>O</b>jalá.</p>\n<h4>How to form it</h4><p>Take the <em>yo</em> present form, drop the <em>-o</em>, and swap the vowel: <b>-ar → e</b>, <b>-er/-ir → a</b>.</p>\n<div class=\"tbl\"><table><tr><th>infinitive</th><th>yo present</th><th>subjunctive</th></tr><tr><td>hablar</td><td>hablo</td><td><b>hable</b></td></tr><tr><td>tener</td><td>tengo</td><td><b>tenga</b></td></tr><tr><td>venir</td><td>vengo</td><td><b>venga</b></td></tr><tr><td>practicar</td><td>practico</td><td><b>practique</b> (spelling)</td></tr></table></div>\n<p>Irregular: <b>ser → sea</b>, <b>ir → vaya</b>, <b>estar → esté</b>, <b>saber → sepa</b>, <b>haber → haya</b>, <b>dar → dé</b>.</p>\n<h4>Cuando + future</h4><p>When <em>cuando</em> points to the future, it takes the subjunctive: <em>cuando <b>llegues</b>, llámame</em>. For habits it doesn't: <em>cuando llego, siempre te llamo</em>.</p>","story":{"title":"Antes del viaje","cast":{"M":"Madre","H":"Hija"},"lines":[["M","¿Ya tienes todo? Quiero que lleves una chaqueta.","Do you have everything? I want you to take a jacket."],["H","Mamá, no creo que haga frío en Cancún.","Mom, I don't think it'll be cold in Cancún."],["M","Por si acaso. Y cuando llegues, llámame.","Just in case. And when you arrive, call me."],["H","Vale. Ojalá el vuelo no tenga retraso.","OK. I hope the flight isn't delayed."],["M","Espero que lo pases muy bien.","I hope you have a great time."],["H","Gracias. ¡Te mando fotos!","Thanks. I'll send you photos!"]],"qs":[{"after":2,"q":"Why does her mom want her to take a jacket?","o":["Just in case","It's snowing in Cancún","The plane is cold"],"a":0},{"after":5,"q":"Which phrase uses the subjunctive for a future moment?","o":["cuando llegues","te mando fotos","ya tienes todo"],"a":0}]}},
+{"id":12,"sec":2,"title":"Travel problems","can":"Explain what went wrong and ask for help politely","items":["Se me [olvidó] el pasaporte. | I forgot my passport. | I forgot the passport | Olvidé el pasaporte.;Olvidé mi pasaporte.;Se me olvidó mi pasaporte.","[Perdí] mi maleta. | I lost my suitcase. | I lost my luggage | Perdí la maleta.;He perdido mi maleta.;Se me perdió la maleta.","¿[Podría] ayudarme, por favor? | Could you help me, please? | Can you help me, please | ¿Me podría ayudar, por favor?;¿Puede ayudarme, por favor?;¿Podrías ayudarme, por favor?;¿Me podrías ayudar, por favor?","El vuelo tiene [retraso]. | The flight is delayed. | The flight has a delay | El vuelo está retrasado.;El vuelo viene con retraso.;El vuelo está demorado.","Se me [rompió] el móvil. | My phone broke. | I broke my phone;My cell phone broke | Se me rompió el celular.;Se me rompió el teléfono.;Mi móvil se rompió.;Mi celular se rompió.","[Necesito] un médico. | I need a doctor. |  | Necesito un doctor.","Me han [robado] la cartera. | My wallet has been stolen. | They stole my wallet;Someone stole my wallet;My wallet was stolen;Someone has stolen my wallet | Me robaron la cartera.;Me robaron la billetera.;Me han robado la billetera.","¿Dónde puedo [cargar] el móvil? | Where can I charge my phone? | Where can I charge the phone | ¿Dónde puedo cargar el celular?;¿Dónde puedo cargar mi móvil?;¿Dónde puedo cargar mi celular?;¿Dónde puedo cargar el teléfono?","Hay un [error] en la reserva. | There is a mistake in the reservation. | There is a mistake in the booking;There is an error in the reservation;There is an error in the booking | Hay un error en la reservación.","Quisiera [cambiar] mi billete. | I would like to change my ticket. |  | Quisiera cambiar mi boleto.;Me gustaría cambiar mi billete.;Quisiera cambiar mi pasaje.;Quisiera cambiar el billete.","La habitación no tiene [agua] caliente. | The room has no hot water. | The room doesn't have hot water;There is no hot water in the room | No hay agua caliente en la habitación.","¿[Hay] alguna farmacia abierta? | Is there a pharmacy open? | Is there any pharmacy open;Is there an open pharmacy;Is any pharmacy open | ¿Hay una farmacia abierta?","No [entiendo], ¿puede repetir? | I don't understand, can you repeat? | I don't understand, could you repeat that;I don't understand, can you repeat that | No entiendo, ¿puedes repetir?;No entiendo, ¿podría repetir?;No entiendo, ¿puede repetirlo?","[Hable] más despacio, por favor. | Speak more slowly, please. | Please speak more slowly;Speak slower, please | Más despacio, por favor.;Por favor, hable más despacio.;Habla más despacio, por favor.;Hable más lento, por favor."],"tip":"<h4>The \"no-fault\" se</h4><p>Spanish has a way to make accidents happen <em>to</em> you: <b>se me olvidó</b> (it got forgotten on me), <b>se me rompió</b>, <b>se me cayó</b> (I dropped it), <b>se me perdió</b>. The verb agrees with the thing: <em>se me olvidaron las llaves</em>.</p>\n<h4>Polite requests</h4><div class=\"tbl\"><table><tr><th>direct</th><th>polite</th></tr><tr><td>¿Puede ayudarme?</td><td><b>¿Podría</b> ayudarme?</td></tr><tr><td>Quiero cambiar…</td><td><b>Quisiera</b> cambiar…</td></tr><tr><td>Necesito…</td><td><b>Necesitaría</b>…</td></tr></table></div>\n<h4>Something just happened</h4><p>In Spain, recent events take the present perfect: <b>me han robado</b> (I've been robbed), <b>ha llegado</b>. Most of Latin America uses the preterite: <em>me robaron</em>.</p>","story":{"title":"En el aeropuerto","cast":{"V":"Viajero","A":"Agente"},"lines":[["V","Perdone, mi maleta no ha llegado.","Excuse me, my suitcase hasn't arrived."],["A","¿De qué vuelo viene?","Which flight are you coming from?"],["V","Del vuelo de Bogotá. Además, ha tenido tres horas de retraso.","The Bogotá flight. And it was three hours late."],["A","Lo siento mucho. ¿Podría rellenar este formulario?","I'm very sorry. Could you fill out this form?"],["V","Claro. Pero se me rompió el móvil. ¿Puedo dar el correo del hotel?","Sure. But my phone broke. Can I give the hotel's email?"],["A","Sí, perfecto. Le llevamos la maleta al hotel mañana.","Yes, perfect. We'll bring the suitcase to your hotel tomorrow."]],"qs":[{"after":2,"q":"Where was the flight from?","o":["Bogotá","Lima","Madrid"],"a":0},{"after":5,"q":"How will he get his suitcase?","o":["Delivered to his hotel tomorrow","He picks it up tonight","It's lost for good"],"a":0}]}}];
+const KINDS=[["tip","Guidebook"],["l1","Lesson 1"],["l2","Lesson 2"],["story","Story"],["l3","Lesson 3"],["practice","Practice"],["l4","Lesson 4"],["review","Unit review"]];
+const ALL_ITEMS=[];
+UNITS.forEach(u=>{u.items=u.items.map((s,i)=>{const p=s.split("|").map(x=>x.trim());const raw=p[0];const m=raw.match(/\[([^\]]+)\]/);const it={id:u.id+"-"+i,u:u.id,es:raw.replace(/[\[\]]/g,""),focus:m?m[1]:null,cloze:raw.replace(/\[[^\]]+\]/,"\u0000"),en:p[1],enAlts:p[2]?p[2].split(";").map(t=>t.trim()).filter(Boolean):[],esAlts:p[3]?p[3].split(";").map(t=>t.trim()).filter(Boolean):[]};ALL_ITEMS.push(it);return it});});
+const UNIT_BY_ID={};UNITS.forEach(u=>UNIT_BY_ID[u.id]=u);
+const NODES=[];UNITS.forEach(u=>KINDS.forEach(([k,label])=>NODES.push({id:"u"+u.id+"-"+k,u,k,label})));
+
+const ICONS={
+star:'<path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.7-4.9 4.5 1.4 6.6L12 17l-6 3.4 1.4-6.6-4.9-4.5 6.6-.7z"/>',
+book:'<path fill="currentColor" d="M3.5 5.5C3.5 4.7 4.2 4 5 4h6v16H5c-.8 0-1.5-.7-1.5-1.5zM13 4h6c.8 0 1.5.7 1.5 1.5v13c0 .8-.7 1.5-1.5 1.5h-6z"/>',
+dumbbell:'<path fill="currentColor" d="M1.5 10h2v4h-2zM4.5 6.5h3v11h-3zM16.5 6.5h3v11h-3zM20.5 10h2v4h-2zM7.5 11h9v2h-9z"/>',
+trophy:'<path fill="currentColor" d="M6 3h12v5a6 6 0 0 1-12 0zM11 13h2v5h-2zM7 18h10v3H7zM2.5 4H6v4.5A3.5 3.5 0 0 1 2.5 5zM18 4h3.5v1A3.5 3.5 0 0 1 18 8.5z"/>',
+bulb:'<path fill="currentColor" d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2zM9 18.5h6V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"/>',
+check:'<path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/>',
+lock:'<path fill="currentColor" d="M7 10V7a5 5 0 0 1 10 0v3h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V7a3 3 0 0 0-6 0z"/>',
+speaker:'<path fill="currentColor" d="M3 9h4l5-4v14l-5-4H3z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',
+flame:'<path fill="currentColor" d="M12 1.5c1.2 3.8 5.5 6.2 5.5 11.5a5.5 5.5 0 0 1-11 0c0-2.7 1.3-4.3 2.7-5.6.2 1.8 1.2 3 2.3 3.1 0-3.2-1-6 .5-9z"/>',
+x:'<path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/>',
+bolt:'<path fill="currentColor" d="M13.5 1.5L4 14h7l-1.5 8.5L20 10h-7z"/>'
+};
+const ic=(n,c="")=>`<svg class="ico ${c}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+
+function dayKey(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function dayOffset(n){const d=new Date();d.setDate(d.getDate()+n);return dayKey(d)}
+
+const DEFAULT=()=>({v:1,xp:0,daily:{},goal:30,streak:{count:0,last:null},done:{},items:{},settings:{dialect:"es-MX",strict:false},updatedAt:0});
+let S=DEFAULT();
+const LS="pasoapaso.v1";
+function migrate(o){const d=DEFAULT();if(!o||typeof o!=="object")return d;return Object.assign(d,o,{settings:Object.assign(d.settings,o.settings||{}),streak:Object.assign(d.streak,o.streak||{})})}
+try{const r=localStorage.getItem(LS);if(r)S=migrate(JSON.parse(r))}catch(e){}
+let remote=null,writing=false,pendingW=false,syncMsg="Progress is saved on this device.";
+function save(){S.updatedAt=Date.now();try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}pushRemote()}
+async function pushRemote(){if(!remote)return;if(writing){pendingW=true;return}writing=true;try{await remote.set({state:JSON.stringify(S),updatedAt:S.updatedAt});syncMsg="Synced to your account."}catch(e){syncMsg="Couldn't sync just now. Progress is still saved in this browser."}writing=false;if(pendingW){pendingW=false;pushRemote()}}
+async function initRemote(){try{if(!window.claude||!window.claude.use)return;const [db,user]=await Promise.all([window.claude.use("db"),window.claude.use("user")]);if(!db||!user)return;const uid=await user.id();if(!uid)return;const ref=db.doc("data/users/"+uid+"/progress");const snap=await ref.get();remote=ref;if(snap.exists){const d=snap.data();if(d&&d.state&&(d.updatedAt||0)>(S.updatedAt||0)){S=migrate(JSON.parse(d.state));try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}syncMsg="Synced to your account.";if(!L&&!P)renderHome();return}}syncMsg="Synced to your account.";if(S.updatedAt)pushRemote();if(!L&&!P)renderRail()}catch(e){}}
+
+function rec(it){const r=S.items[it.id];if(!r||!r.n)return 0;return Math.pow(2,-(Date.now()-r.t)/(r.h*864e5))}
+function tierOf(it){const r=S.items[it.id];if(!r||!r.n||r.h<1.5)return 0;if(r.h<5)return 1;return 2}
+function seen(maxU=99){return ALL_ITEMS.filter(it=>it.u<=maxU&&S.items[it.id]&&S.items[it.id].n>0)}
+function dueItems(){return seen().filter(it=>rec(it)<0.7)}
+function weakest(arr,k){return arr.slice().sort((a,b)=>rec(a)-rec(b)).slice(0,k)}
+const PROD=new Set(["typeEs","listen","typeEn"]);
+function grade(it,ok,type){const r=S.items[it.id]||{h:1,t:Date.now(),n:0,c:0};const elapsed=(Date.now()-r.t)/864e5;if(ok){const spaced=r.n===0||elapsed>=r.h*0.5;r.h=Math.min(180,r.h*(spaced?(PROD.has(type)?2.4:1.8):1.15))}else r.h=Math.max(0.3,r.h*0.45);r.t=Date.now();r.n++;if(ok)r.c++;S.items[it.id]=r}
+function addXP(n){S.xp+=n;const d=dayKey();S.daily[d]=(S.daily[d]||0)+n;if(S.streak.last!==d){S.streak.count=S.streak.last===dayOffset(-1)?S.streak.count+1:1;S.streak.last=d}const keep=new Set([...Array(30)].map((_,i)=>dayOffset(-i)));Object.keys(S.daily).forEach(k=>{if(!keep.has(k))delete S.daily[k]})}
+function streakNow(){return S.streak.last===dayKey()||S.streak.last===dayOffset(-1)?S.streak.count:0}
+function curIndex(){const i=NODES.findIndex(n=>!S.done[n.id]);return i<0?NODES.length:i}
+function unitStrength(u){const s=u.items.filter(it=>S.items[it.id]&&S.items[it.id].n);if(!s.length)return 0;return s.reduce((a,it)=>a+rec(it),0)/u.items.length}
+
+let voices=[];
+function loadVoices(){try{voices=window.speechSynthesis?speechSynthesis.getVoices():[]}catch(e){voices=[]}}
+loadVoices();try{if(window.speechSynthesis)speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
+const HAS_TTS=!!window.speechSynthesis;
+function esVoice(){loadVoices();const lg=v=>v.lang.replace("_","-");const pref=S.settings.dialect==="es-ES"?["es-ES"]:["es-MX","es-US","es-419","es-CO","es-AR"];for(const p of pref){const v=voices.find(v=>lg(v).toLowerCase().startsWith(p.toLowerCase()));if(v)return v}return voices.find(v=>/^es/i.test(v.lang))||null}
+function canListen(){return HAS_TTS&&!!esVoice()}
+function speak(text,slow){if(!HAS_TTS)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);const v=esVoice();if(v)u.voice=v;u.lang=v?v.lang:S.settings.dialect;u.rate=slow?0.62:0.95;speechSynthesis.speak(u)}catch(e){}}
+
+const stripAcc=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"");
+const normBase=s=>s.toLowerCase().replace(/[’‘`]/g,"'").replace(/[¿¡?!.,;:"«»()—–]/g," ").replace(/\s-\s|-/g," ").replace(/\s+/g," ").trim();
+const CONTR=[["i'm","i am"],["you're","you are"],["we're","we are"],["they're","they are"],["he's","he is"],["she's","she is"],["it's","it is"],["that's","that is"],["what's","what is"],["there's","there is"],["who's","who is"],["let's","let us"],["don't","do not"],["doesn't","does not"],["didn't","did not"],["isn't","is not"],["aren't","are not"],["wasn't","was not"],["weren't","were not"],["can't","cannot"],["can not","cannot"],["won't","will not"],["i'll","i will"],["you'll","you will"],["we'll","we will"],["it'll","it will"],["i've","i have"],["we've","we have"],["you've","you have"],["they've","they have"],["i'd","i would"],["we'd","we would"],["you'd","you would"],["haven't","have not"],["hasn't","has not"],["couldn't","could not"],["wouldn't","would not"],["grandma","grandmother"],["dad","father"],["okay","ok"]];
+function normEn(s){let t=" "+normBase(s)+" ";for(const [a,b] of CONTR)t=t.split(" "+a+" ").join(" "+b+" ");return t.replace(/\s+/g," ").trim()}
+const normEs=s=>normBase(s);
+const PRON=/^(yo|tú|tu|él|ella|usted|nosotros|nosotras|vosotros|vosotras|ellos|ellas|ustedes) /;
+function lev(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;let prev=[...Array(n+1).keys()];for(let i=1;i<=m;i++){const cur=[i];for(let j=1;j<=n;j++)cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));prev=cur}return prev[n]}
+function checkText(input,answers,lang){const N=lang==="en"?normEn:normEs;const u=N(input);if(!u)return{ok:false,empty:true};const vars=[u];if(lang==="es"&&PRON.test(u))vars.push(u.replace(PRON,""));const A=answers.map(N);for(const v of vars)if(A.includes(v))return{ok:true};for(const v of vars)for(let i=0;i<A.length;i++)if(stripAcc(v)===stripAcc(A[i])){if(S.settings.strict)return{ok:false,note:"Check your accents.",best:answers[i]};return{ok:true,note:"Watch the accents: "+answers[i],best:answers[i]}}for(const v of vars)for(let i=0;i<A.length;i++){const a=stripAcc(A[i]),b=stripAcc(v);const tol=lang==="en"?(a.length>=25?2:a.length>=6?1:0):0;if(tol&&lev(a,b)<=tol)return{ok:true,note:"Small typo. Correct: "+answers[i],best:answers[i]}}return{ok:false}}
+
+function lowerFirst(w){return w==="I"||w==="DJ"?w:w.charAt(0).toLowerCase()+w.slice(1)}
+function tok(s){return s.replace(/[¿¡?!.,;:]/g," ").split(/\s+/).filter(Boolean).map((w,i)=>i===0?lowerFirst(w):w)}
+function sameUnitFirst(it){const u=UNIT_BY_ID[it.u];return shuffle(u.items.filter(x=>x!==it)).concat(shuffle(ALL_ITEMS.filter(x=>x.u!==it.u)))}
+function others(it,field,k){const out=[],seenT=new Set([normBase(it[field])]);for(const x of sameUnitFirst(it)){const v=x[field],key=normBase(v);if(!seenT.has(key)){seenT.add(key);out.push(v)}if(out.length>=k)break}return out}
+function otherFocus(it,k){const out=[],s=new Set([it.focus.toLowerCase()]);for(const x of sameUnitFirst(it)){if(x.focus){const f=lowerFirst(x.focus);if(!s.has(f.toLowerCase())){s.add(f.toLowerCase());out.push(f)}}if(out.length>=k)break}return out}
+function otherWords(it,field,words,k){const have=new Set(words.map(w=>w.toLowerCase()));const pool=[];for(const x of sameUnitFirst(it).slice(0,12))for(const w of tok(x[field]))if(!have.has(w.toLowerCase())){have.add(w.toLowerCase());pool.push(w)}return shuffle(pool).slice(0,k)}
+
+function makeEx(type,it,extra){
+  const ex={type,item:it};
+  if(type==="cloze"&&!it.focus)ex.type=type="tilesEs";
+  if((type==="listen"||type==="listenTiles")&&!canListen())ex.type=type=(type==="listen"?"typeEs":"tilesEs");
+  if(type==="intro"||type==="mcEsEn"){ex.opts=shuffle([it.en,...others(it,"en",3)]);ex.answer=it.en}
+  else if(type==="mcEnEs"){ex.opts=shuffle([it.es,...others(it,"es",3)]);ex.answer=it.es}
+  else if(type==="cloze"){const st=/^[¿¡]?\u0000/.test(it.cloze);const cap=o=>o.charAt(0).toUpperCase()+o.slice(1);const f=lowerFirst(it.focus);ex.opts=shuffle([f,...otherFocus(it,3)]);ex.answer=f;if(st){ex.opts=ex.opts.map(cap);ex.answer=cap(f)}}
+  else if(type==="tilesEs"||type==="listenTiles"){const w=tok(it.es);ex.tiles=shuffle([...w,...otherWords(it,"es",w,type==="listenTiles"?3:4)])}
+  else if(type==="tilesEn"){const w=tok(it.en);ex.tiles=shuffle([...w,...otherWords(it,"en",w,4)])}
+  else if(type==="match"){ex.pairs=extra}
+  return ex;
+}
+const TYPES=[["mcEnEs","tilesEn","tilesEs","cloze"],["tilesEs","cloze","listenTiles","typeEn","mcEnEs","tilesEs"],["typeEs","listen","typeEn","speak","typeEs","tilesEs"]];
+function chooseType(it,tier,last,used){let opts=TYPES[Math.min(2,tier)].filter(t=>t!==last);if(used.speak)opts=opts.filter(t=>t!=="speak");if(!canListen())opts=opts.filter(t=>t!=="listen"&&t!=="listenTiles");const t=pick(opts);if(t==="speak")used.speak=true;return t}
+
+function buildSession(kind,u){
+  let pool=[],N=12,minTier=0,intro=false;const its=u&&u.items?u.items:[];
+  if(kind==="l1"){pool=its.slice(0,7);intro=true}
+  else if(kind==="l2"){pool=its.slice(7).concat(shuffle(its.slice(0,7)).slice(0,3));intro=true}
+  else if(kind==="l3"){pool=its;minTier=1}
+  else if(kind==="l4"){pool=its;minTier=2}
+  else if(kind==="practice"){const s=seen(u.id);pool=s.length>=6?weakest(s,8).concat(shuffle(its).slice(0,3)):its;minTier=1}
+  else if(kind==="review"){pool=its;N=15;minTier=1}
+  else if(kind==="global"){const d=dueItems();pool=d.length>=4?weakest(d,12):weakest(seen(),10);minTier=1}
+  else if(kind==="jump"){pool=shuffle(ALL_ITEMS.filter(it=>UNIT_BY_ID[it.u].sec<u.sec)).slice(0,15);N=15;minTier=1}
+  pool=[...new Set(pool)];
+  const ex=[],used={};let last=null;
+  if(intro){const fresh=pool.filter(it=>!(S.items[it.id]&&S.items[it.id].n));const intro_=[];fresh.forEach((it,i)=>{ex.push(makeEx("intro",it));intro_.push(it);if(i%2===1){const p=pick(intro_);const t=chooseType(p,0,last,used);last=t;ex.push(makeEx(t,p))}});N=Math.max(N,ex.length+5)}
+  const cyc=shuffle(pool);let k=0;
+  while(ex.length<N&&cyc.length&&k<300){const it=cyc[k%cyc.length];k++;const t=chooseType(it,Math.max(minTier,tierOf(it)),last,used);last=t;ex.push(makeEx(t,it))}
+  if(["l1","l2","practice","global"].includes(kind)&&pool.length>=4){const pr=shuffle(pool).sort((a,b)=>a.es.length-b.es.length).slice(0,4);ex.splice(Math.min(ex.length,3+Math.floor(Math.random()*Math.max(1,ex.length-4))),0,makeEx("match",null,pr))}
+  return ex;
+}
+
+let L=null,P=null;
+const ov=document.getElementById("ov");
+function openOv(html){ov.innerHTML=`<div class="ov" role="dialog" aria-modal="true">${html}</div>`;document.body.style.overflow="hidden"}
+function closeOv(){ov.innerHTML="";document.body.style.overflow="";L=null;P=null;try{speechSynthesis.cancel()}catch(e){}renderHome()}
+function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+
+function startSession(kind,u,node){
+  const q=buildSession(kind,u);if(!q.length){toast("Nothing to review yet. Finish a lesson first.");return}
+  L={kind,u,node,queue:q,total:q.length,done:0,first:0,firstOk:0,combo:0,maxCombo:0,mistakes:0,start:Date.now(),state:"idle",maxMistakes:kind==="jump"?3:Infinity};
+  openOv(`<div class="ov-top"><button class="xbtn" data-act="quit" aria-label="Quit lesson">${ic("x")}</button><div class="prog" aria-hidden="true"><i id="pbar" style="width:0%"></i></div><div class="combo" id="combo"></div></div><div class="ov-body" id="exb"></div><div class="foot" id="foot"></div>`);
+  renderEx();
+}
+function promptEs(text,slow=true){return `<div class="prompt">${HAS_TTS?`<button class="say" data-act="say" data-t="${esc(text)}" aria-label="Play audio">${ic("speaker")}</button>`:""}${HAS_TTS&&slow?`<button class="say slow" data-act="sayslow" data-t="${esc(text)}" aria-label="Play slowly">slow</button>`:""}<div class="ptext" lang="es">${esc(text)}</div></div>`}
+function optsHTML(opts,lang){return `<div class="opts" role="group">${opts.map((o,i)=>`<button class="opt" data-act="opt" data-i="${i}" aria-pressed="false" ${lang?`lang="${lang}"`:""}><kbd>${i+1}</kbd><span>${esc(o)}</span></button>`).join("")}</div>`}
+function tilesHTML(ex){return `<div class="lane" id="lane" aria-label="Your answer"></div><div class="bank" id="bank">${ex.tiles.map((w,i)=>`<button class="tile" data-act="tile" data-i="${i}">${esc(w)}</button>`).join("")}</div>`}
+function inputHTML(lang){return `<textarea class="ans" id="ans" lang="${lang}" placeholder="${lang==="es"?"Escribe en español":"Type in English"}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Your answer"></textarea>${lang==="es"?`<div class="accents">${["á","é","í","ó","ú","ñ","ü","¿","¡"].map(c=>`<button data-act="acc" data-c="${c}" tabindex="-1">${c}</button>`).join("")}</div>`:""}`}
+function renderEx(){
+  const ex=L.queue[0];const it=ex.item;L.sel=null;L.picked=[];L.state="idle";L.mSel=null;L.mLeft=0;
+  let h="";
+  switch(ex.type){
+    case"intro":h=`<span class="newtag">New phrase</span><h2>What does this mean?</h2>${promptEs(it.es)}<button class="peek" data-act="peek">Peek at the meaning</button><p class="hint" id="peekt" hidden>${esc(it.en)}</p>${optsHTML(ex.opts)}`;break;
+    case"mcEsEn":h=`<h2>What does this mean?</h2>${promptEs(it.es)}${optsHTML(ex.opts)}`;break;
+    case"mcEnEs":h=`<h2>Choose the Spanish</h2><div class="ptext en">${esc(it.en)}</div>${optsHTML(ex.opts,"es")}`;break;
+    case"cloze":{const parts=it.cloze.split("\u0000");h=`<h2>Fill in the blank</h2><div class="cloze" lang="es">${esc(parts[0])}<span class="blank" id="blank">&nbsp;</span>${esc(parts[1])}</div><p class="hint">${esc(it.en)}</p>${optsHTML(ex.opts,"es")}`;break}
+    case"tilesEs":h=`<h2>Write this in Spanish</h2><div class="ptext en">${esc(it.en)}</div>${tilesHTML(ex)}`;break;
+    case"tilesEn":h=`<h2>Translate into English</h2>${promptEs(it.es)}${tilesHTML(ex)}`;break;
+    case"listenTiles":h=`<h2>Tap what you hear</h2><div class="bigsay"><button class="say" data-act="say" data-t="${esc(it.es)}" aria-label="Play audio">${ic("speaker")}</button><button class="say slow" data-act="sayslow" data-t="${esc(it.es)}" aria-label="Play slowly">slow</button></div>${tilesHTML(ex)}`;break;
+    case"typeEs":h=`<h2>Write this in Spanish</h2><div class="ptext en">${esc(it.en)}</div>${inputHTML("es")}`;break;
+    case"typeEn":h=`<h2>Translate into English</h2>${promptEs(it.es)}${inputHTML("en")}`;break;
+    case"listen":h=`<h2>Type what you hear</h2><div class="bigsay"><button class="say" data-act="say" data-t="${esc(it.es)}" aria-label="Play audio">${ic("speaker")}</button><button class="say slow" data-act="sayslow" data-t="${esc(it.es)}" aria-label="Play slowly">slow</button></div>${inputHTML("es")}`;break;
+    case"speak":h=`<h2>Say this out loud</h2><p class="hint">Listen, then shadow it: match the rhythm, not just the words.</p>${promptEs(it.es)}<p class="hint">${esc(it.en)}</p>`;break;
+    case"match":{const L1=shuffle(ex.pairs.map((p,i)=>({i,t:p.es}))),R=shuffle(ex.pairs.map((p,i)=>({i,t:p.en})));L.mLeft=ex.pairs.length;h=`<h2>Tap the matching pairs</h2><div class="match"><div class="col">${L1.map(x=>`<button class="mt" lang="es" data-act="m" data-side="es" data-i="${x.i}" aria-pressed="false">${esc(x.t)}</button>`).join("")}</div><div class="col">${R.map(x=>`<button class="mt" data-act="m" data-side="en" data-i="${x.i}" aria-pressed="false">${esc(x.t)}</button>`).join("")}</div></div>`;break}
+  }
+  document.getElementById("exb").innerHTML=`<div class="ex">${h}</div>`;
+  document.getElementById("pbar").style.width=(100*L.done/L.total)+"%";
+  document.getElementById("combo").textContent=L.kind==="jump"?`${Math.max(0,L.maxMistakes-L.mistakes)} misses left`:L.combo>=3?L.combo+" in a row":"";
+  footIdle();
+  const auto=["intro","mcEsEn","tilesEn","listenTiles","typeEn","listen","speak"];
+  if(auto.includes(ex.type)&&it)setTimeout(()=>speak(it.es),250);
+  const a=document.getElementById("ans");if(a)setTimeout(()=>a.focus(),50);
+}
+function footIdle(){const ex=L.queue[0];const f=document.getElementById("foot");f.className="foot";
+  if(ex.type==="speak"){f.innerHTML=`<div class="foot-in"><button class="btn ghost" data-act="skipspeak">Can't speak now</button><button class="btn" data-act="spoke">I said it</button></div>`;return}
+  if(ex.type==="match"){f.innerHTML=`<div class="foot-in"><span class="hint">Match all four pairs</span><button class="btn" disabled>Check</button></div>`;return}
+  f.innerHTML=`<div class="foot-in"><button class="linkbtn" data-act="skip">Skip</button><button class="btn" id="chk" data-act="check" disabled>Check</button></div>`}
+function setCheckable(on){const b=document.getElementById("chk");if(b)b.disabled=!on}
+
+function evaluate(){
+  const ex=L.queue[0],it=ex.item;let res;
+  if(["intro","mcEsEn","mcEnEs","cloze"].includes(ex.type)){const ok=ex.opts[L.sel]===ex.answer;res={ok}}
+  else if(["tilesEs","listenTiles","tilesEn"].includes(ex.type)){const txt=L.picked.map(i=>ex.tiles[i]).join(" ");const lang=ex.type==="tilesEn"?"en":"es";res=checkText(txt,lang==="en"?[it.en,...it.enAlts]:ex.type==="listenTiles"?[it.es]:[it.es,...it.esAlts],lang)}
+  else{const v=document.getElementById("ans").value;const lang=ex.type==="typeEn"?"en":"es";res=checkText(v,lang==="en"?[it.en,...it.enAlts]:ex.type==="listen"?[it.es]:[it.es,...it.esAlts],lang);if(res.empty)return}
+  showResult(res.ok,res.note);
+}
+function solution(ex){const it=ex.item;if(!it)return{a:"",b:""};if(ex.type==="tilesEn"||ex.type==="typeEn"||ex.type==="intro"||ex.type==="mcEsEn")return{a:it.en,b:it.es};return{a:it.es,b:it.en}}
+const PRAISE=["Nice!","Correct!","Great!","¡Muy bien!","¡Eso es!","Exactly."];
+function showResult(ok,note,overridable=true){
+  const ex=L.queue[0];L.state="checked";
+  if(!ex.retry){L.first++;if(ok)L.firstOk++;if(ex.item)grade(ex.item,ok,ex.type)}
+  if(ok){L.done++;L.combo++;L.maxCombo=Math.max(L.maxCombo,L.combo)}else{L.combo=0;L.mistakes++}
+  document.querySelectorAll(".opt,.tile,textarea.ans,.accents button").forEach(b=>b.disabled=true);
+  const s=solution(ex);const f=document.getElementById("foot");f.className="foot "+(ok?"ok":"bad");
+  const canCount=!ok&&overridable&&["tilesEs","tilesEn","typeEs","typeEn","listen","listenTiles"].includes(ex.type);
+  f.innerHTML=`<div class="foot-in"><div class="fb" role="status"><strong>${ok?pick(PRAISE):"Not quite"}</strong>${ok?"":`<div class="ansl">Correct answer: <b ${["tilesEn","typeEn","intro","mcEsEn"].includes(ex.type)?"":'lang="es"'}>${esc(s.a)}</b></div>`}${note?`<div class="note">${esc(note)}</div>`:""}${s.b?`<div class="note">${esc(s.b)}</div>`:""}</div><div class="fbtns">${canCount?`<button class="linkbtn" data-act="countit">I was right</button>`:""}<button class="btn ${ok?"good":"warn"}" id="cont" data-act="cont">Continue</button></div></div>`;
+  L.lastOk=ok;
+  document.getElementById("pbar").style.width=(100*L.done/L.total)+"%";
+  setTimeout(()=>{const c=document.getElementById("cont");if(c)c.focus()},30);
+  if(ok&&["typeEs","listen","tilesEs","listenTiles","mcEnEs","cloze"].includes(ex.type))speak(ex.item.es);
+}
+function countIt(){const ex=L.queue[0];L.mistakes--;L.done++;L.combo=1;if(!ex.retry&&ex.item){L.firstOk++;const r=S.items[ex.item.id];if(r){r.h=Math.max(r.h,1.2)*1.6;r.c++}}L.lastOk=true;advance()}
+function advance(){
+  const ex=L.queue.shift();
+  if(!L.lastOk&&ex.type!=="match"){L.queue.push(Object.assign(makeEx(ex.type,ex.item),{retry:true}))}
+  if(L.mistakes>L.maxMistakes)return finish(false);
+  if(!L.queue.length)return finish(true);
+  renderEx();
+}
+function finish(passed){
+  const secs=Math.round((Date.now()-L.start)/1000);const acc=L.first?Math.round(100*L.firstOk/L.first):100;
+  let xp=0,title="Lesson complete",sub="";
+  if(L.kind==="jump"){
+    if(passed){xp=20;title="You jumped ahead";sub=`Section ${L.u.sec+1} is open. Everything before it counts as done, and those phrases go into your review queue.`;NODES.forEach(n=>{if(n.u.sec<L.u.sec)S.done[n.id]=true});ALL_ITEMS.forEach(it=>{if(UNIT_BY_ID[it.u].sec<L.u.sec&&!(S.items[it.id]&&S.items[it.id].n))S.items[it.id]={h:2.5,t:Date.now(),n:1,c:1}})}
+    else{xp=5;title="Not this time";sub="Too many misses to skip ahead. The phrases you missed are now flagged for review, and you can retake the test anytime."}
+  }else{
+    xp=10+(acc===100?5:0)+Math.floor(L.maxCombo/5)*2+(L.kind==="review"?5:0);
+    if(L.kind==="global")title="Review done";
+    if(L.kind==="review"){title="Unit review passed";sub="This unit is now gold. Its phrases will keep coming back in reviews as they fade."}
+    if(L.node)S.done[L.node]=true;
+  }
+  addXP(xp);save();
+  const node=L.node;L=null;
+  ov.querySelector(".ov").innerHTML=`<div class="ov-body"><div class="done-scr"><h2>${esc(title)}</h2>${sub?`<p>${esc(sub)}</p>`:""}<div class="tiles3"><div style="--tc:var(--accent-deep)"><span>XP</span><b>+${xp}</b></div><div style="--tc:var(--good)"><span>Accuracy</span><b>${acc}%</b></div><div style="--tc:var(--s3)"><span>Time</span><b>${Math.floor(secs/60)}:${String(secs%60).padStart(2,"0")}</b></div></div><button class="btn" data-act="close" id="cont">Continue</button></div></div>`;
+  setTimeout(()=>{const c=document.getElementById("cont");if(c)c.focus()},30);
+}
+
+function startStory(u,node){
+  const st=u.story;const ev=[];st.lines.forEach((l,j)=>{ev.push({line:j});st.qs.filter(q=>q.after===j).forEach(q=>ev.push({q:Object.assign({},q,{order:shuffle(q.o.map((t,i)=>i))})}))});
+  P={u,node,ev,i:0,start:Date.now(),miss:0,answered:{}};
+  const cols=["var(--s1)","var(--s2)","var(--s3)"];const keys=Object.keys(st.cast);P.color=k=>cols[(keys.indexOf(k)+u.sec)%3];
+  openOv(`<div class="ov-top"><button class="xbtn" data-act="quit" aria-label="Close story">${ic("x")}</button><div class="prog"><i id="pbar" style="width:0%"></i></div><div class="combo"></div></div><div class="ov-body" id="sb"></div><div class="foot" id="foot"></div>`);
+  renderStory();
+}
+function renderStory(){
+  const st=P.u.story;let h=`<div class="story"><span class="newtag">Story · Unit ${P.u.id}</span><h2 lang="es">${esc(st.title)}</h2><p class="hint">Tap any line to see the English. Tap the speaker to hear it again.</p>`;
+  for(let k=0;k<=P.i&&k<P.ev.length;k++){const e=P.ev[k];
+    if(e.line!=null){const [s,es_,en]=st.lines[e.line];h+=`<div class="sline ${k===P.i?"fresh":""}"><span class="spk" style="background:${P.color(s)}">${esc(st.cast[s].charAt(0))}</span><div class="sbody"><div class="sname">${esc(st.cast[s])}</div><button class="stext" lang="es" data-act="tr">${esc(es_)}<span class="tr" lang="en" hidden>${esc(en)}</span></button></div>${HAS_TTS?`<button class="say" style="width:38px;height:38px" data-act="say" data-t="${esc(es_)}" aria-label="Play line">${ic("speaker")}</button>`:""}</div>`}
+    else{const q=e.q;const ans=P.answered[k];h+=`<div class="sq"><div class="q">${esc(q.q)}</div><div class="opts">${q.order.map(i=>`<button class="opt ${ans!=null&&i===q.a?"right":""}" data-act="sq" data-k="${k}" data-i="${i}" ${ans!=null?"disabled":""}>${esc(q.o[i])}</button>`).join("")}</div></div>`}}
+  h+=`</div>`;
+  const sb=document.getElementById("sb");sb.innerHTML=h;sb.scrollTop=sb.scrollHeight;
+  document.getElementById("pbar").style.width=(100*(P.i+1)/P.ev.length)+"%";
+  const cur=P.ev[P.i];const f=document.getElementById("foot");f.className="foot";
+  const blocked=cur.q&&P.answered[P.i]==null;
+  f.innerHTML=`<div class="foot-in"><span class="hint">${blocked?"Answer to keep going":""}</span><button class="btn" id="cont" data-act="snext" ${blocked?"disabled":""}>${P.i>=P.ev.length-1&&!blocked?"Finish":"Continue"}</button></div>`;
+  if(cur.line!=null)setTimeout(()=>speak(st.lines[cur.line][1]),200);
+}
+function storyNext(){if(P.i<P.ev.length-1){P.i++;renderStory()}else{const xp=P.miss?10:15;S.done[P.node]=true;addXP(xp);save();const secs=Math.round((Date.now()-P.start)/1000);const qn=P.ev.filter(e=>e.q).length;P=null;ov.querySelector(".ov").innerHTML=`<div class="ov-body"><div class="done-scr"><h2>Story complete</h2><p>Reading whole conversations is where the phrases you drill start to make sense together.</p><div class="tiles3"><div style="--tc:var(--accent-deep)"><span>XP</span><b>+${xp}</b></div><div style="--tc:var(--good)"><span>Questions</span><b>${qn}/${qn}</b></div><div style="--tc:var(--s3)"><span>Time</span><b>${Math.floor(secs/60)}:${String(secs%60).padStart(2,"0")}</b></div></div><button class="btn" data-act="close" id="cont">Continue</button></div></div>`}}
+
+function openGuide(u,node){
+  openOv(`<div class="ov-top"><button class="xbtn" data-act="${node?"gdone":"close"}" data-node="${node||""}" aria-label="Close guidebook">${ic("x")}</button><div style="flex:1"></div></div><div class="ov-body"><div class="gb" style="--c:var(${SECTIONS[u.sec].c})"><span class="newtag">Guidebook · Unit ${u.id}</span><h2>${esc(u.title)}</h2><p class="hint">${esc(u.can)}</p>${u.tip}<h4>Key phrases</h4><div class="kp">${u.items.map(it=>`<div>${HAS_TTS?`<button class="say" data-act="say" data-t="${esc(it.es)}" aria-label="Play">${ic("speaker")}</button>`:""}<span><span lang="es">${esc(it.es)}</span><small>${esc(it.en)}</small></span></div>`).join("")}</div><div><button class="btn" data-act="${node?"gdone":"close"}" data-node="${node||""}">${node?"Got it":"Close"}</button></div></div></div>`);
+}
+
+function renderHome(){renderTop();renderPath();renderRail()}
+function renderTop(){const s=streakNow();const c=document.getElementById("chipStreak");c.className="chip flame"+(s?"":" off");c.innerHTML=ic("flame")+s;c.title=s+" day streak";const x=document.getElementById("chipXP");const t=S.daily[dayKey()]||0;x.innerHTML=ic("bolt")+`${t}/${S.goal}`;x.title="XP today / daily goal";const r=document.getElementById("chipRev");const d=dueItems().length;r.disabled=!seen().length;r.textContent=d?`Review ${d}`:"Review";r.title=d?d+" phrases are fading":"Practice your weakest phrases"}
+function renderPath(){
+  const ci=curIndex();let h="";
+  if(S.xp===0&&ci===0)h+=`<div class="welcome"><h2 style="font-size:24px">Already know some Spanish?</h2><p>Start at the beginning to warm up fast, or take a jump test. Pass it with three misses or fewer and everything before that section is marked done.</p><div class="row"><button class="btn" data-act="node" data-id="${NODES[0].id}">Start from Unit 1</button><button class="btn ghost" data-act="jump" data-sec="1">Test into A2</button><button class="btn ghost" data-act="jump" data-sec="2">Test into B1</button></div></div>`;
+  SECTIONS.forEach((sec,si)=>{
+    const firstIdx=NODES.findIndex(n=>n.u.sec===si);const locked=firstIdx>ci;
+    h+=`<div class="sec-head"><span class="eyebrow">Section ${si+1}</span><h2>${esc(sec.name)}<span class="cefr">${sec.cefr}</span></h2><p>${esc(sec.blurb)}</p>${locked&&si>0?`<div><button class="btn ghost small" data-act="jump" data-sec="${si}">Jump here</button></div>`:""}</div>`;
+    UNITS.filter(u=>u.sec===si).forEach(u=>{
+      const str=Math.round(100*unitStrength(u));
+      h+=`<div class="unit" style="--c:var(${sec.c});--cd:var(${sec.cd})"><div class="ubanner"><div class="t"><div class="k">Unit ${u.id}</div><h3>${esc(u.title)}</h3><p>${esc(u.can)}</p><div class="meter" title="Memory strength ${str}%"><i style="width:${str}%"></i></div></div><button class="gbtn" data-act="guide" data-u="${u.id}">${ic("book")}Guide</button></div><div class="nodes">`;
+      NODES.filter(n=>n.u===u).forEach((n,j)=>{
+        const idx=NODES.indexOf(n);const done=!!S.done[n.id],cur=idx===ci,lk=idx>ci;
+        const icon=lk?"lock":n.k==="tip"?"bulb":n.k==="story"?"book":n.k==="practice"?"dumbbell":n.k==="review"?"trophy":done?"check":"star";
+        const x=Math.round(Math.sin(j*0.95)*62);
+        const cls=`node k-${n.k} ${done?"done":""} ${cur?"cur":""} ${lk?"locked":""} ${done&&n.k==="review"?"gold":""}`;
+        const lab=n.k==="story"?"Story: "+u.story.title:n.label;
+        h+=`<div class="nwrap" style="--x:${x}px">${cur?`<span class="bubble">${S.xp?"Start":"Empieza"}</span>`:""}<button class="${cls}" data-act="node" data-id="${n.id}" aria-label="${esc(lab)}${lk?" (locked)":done?" (done)":""}" title="${esc(lab)}">${ic(icon)}</button>${cur?`<div class="ncap">${esc(lab)}</div>`:""}</div>`;
+      });
+      h+=`</div></div>`;
+    });
+  });
+  if(ci>=NODES.length)h+=`<div class="welcome"><h2 style="font-size:24px">Course complete</h2><p>Every unit is done. Keep the phrases alive with daily reviews; the review count in the header shows what's fading.</p></div>`;
+  document.getElementById("path").innerHTML=h;
+}
+function weekChart(){const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return{k:dayKey(d),l:"SMTWTFS"[d.getDay()]}});const vals=days.map(d=>S.daily[d.k]||0);const W=280,H=120,top=16,bot=20,max=Math.max(S.goal,...vals,10);const bw=26,gap=(W-7*bw)/6;const y=v=>top+(H-top-bot)*(1-v/max);let g=`<line x1="0" x2="${W}" y1="${y(S.goal)}" y2="${y(S.goal)}" stroke="var(--accent-deep)" stroke-dasharray="4 4" stroke-width="1.5"/><text x="${W}" y="${y(S.goal)-4}" text-anchor="end">goal ${S.goal}</text>`;days.forEach((d,i)=>{const x=i*(bw+gap),v=vals[i],yy=y(v);g+=`<rect x="${x}" y="${v?yy:H-bot-2}" width="${bw}" height="${v?H-bot-yy:2}" rx="5" fill="${i===6?"var(--accent)":"var(--s1)"}" opacity="${v?1:.35}"/><text x="${x+bw/2}" y="${H-5}" text-anchor="middle">${d.l}</text>${i===6&&v?`<text x="${x+bw/2}" y="${yy-4}" text-anchor="middle" style="fill:var(--ink)">${v}</text>`:""}`});return `<svg class="chart" viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="XP over the last 7 days">${g}</svg>`}
+function renderRail(){
+  const s=streakNow(),t=S.daily[dayKey()]||0,d=dueItems().length,sn=seen().length;const strong=seen().filter(it=>S.items[it.id].h>=7&&rec(it)>0.8).length;
+  const wk=[...Array(7)].map((_,i)=>{const dd=new Date();dd.setDate(dd.getDate()-6+i);const k=dayKey(dd);return `<div>${"SMTWTFS"[dd.getDay()]}<i class="${S.daily[k]?"on":""} ${i===6?"today":""}"></i></div>`}).join("");
+  document.getElementById("rail").innerHTML=`
+  <div class="card"><div class="streak ${s?"":"off"}">${ic("flame")}<div><div class="big">${s}</div><div class="sub">day streak${s&&S.streak.last!==dayKey()?" · practice today to keep it":""}</div></div></div><div class="week">${wk}</div></div>
+  <div class="card"><h3>Daily goal</h3><div class="bar"><i style="width:${Math.min(100,100*t/S.goal)}%"></i></div><p class="sub">${t>=S.goal?"Goal met for today. ¡Bien hecho!":`${S.goal-t} XP to go today`}</p>${weekChart()}</div>
+  <div class="card"><h3>Review</h3><p class="sub">${!sn?"Phrases you learn show up here as they start to fade from memory.":d?`${d} phrase${d>1?"s are":" is"} fading. A short review now resets the clock.`:"Everything is fresh. You can still drill your weakest phrases."}</p><div><button class="btn small" data-act="global" ${sn?"":"disabled"}>${d?"Review now":"Practice weakest"}</button></div></div>
+  <div class="card"><div class="stats3"><div><b>${S.xp}</b><span>Total XP</span></div><div><b>${sn}</b><span>Phrases seen</span></div><div><b>${strong}</b><span>Long-term</span></div></div></div>
+  <div class="card"><h3>Settings</h3>
+   <div class="setrow"><span class="lab">Daily goal</span><div class="seg">${[10,20,30,50].map(g=>`<button data-act="goal" data-g="${g}" aria-pressed="${S.goal===g}">${g} XP</button>`).join("")}</div></div>
+   <div class="setrow"><span class="lab">Audio accent</span><div class="seg">${[["es-MX","Latin America"],["es-ES","Spain"]].map(([v,l])=>`<button data-act="dialect" data-v="${v}" aria-pressed="${S.settings.dialect===v}">${l}</button>`).join("")}</div>${HAS_TTS&&!canListen()?`<p class="sub">No Spanish voice found on this device, so listening exercises are swapped for reading ones.</p>`:""}</div>
+   <label class="tog"><input type="checkbox" id="strict" data-act="strict" ${S.settings.strict?"checked":""}> Count missing accents as wrong</label>
+   <div class="row"><button class="btn ghost small" data-act="reset">${resetArm?"Tap again to erase everything":"Reset progress"}</button></div>
+   <p class="sync">${esc(syncMsg)}</p></div>
+  <div class="card"><details class="method"><summary>How this course works</summary><ul>
+   <li><b>Duolingo's skeleton.</b> Sections mapped to CEFR levels, units built around one real-world goal, and a single path where lessons, stories, practice and a unit review are interleaved.</li>
+   <li><b>Spaced repetition.</b> Every phrase has a memory half-life, like Duolingo's half-life regression model. Get it right after a gap and the half-life grows; miss it and it shrinks. Review pulls whatever is fading.</li>
+   <li><b>Adaptive difficulty.</b> Weak phrases come up as recognition (multiple choice, tiles). As they strengthen you're pushed to recall and produce them by typing and dictation, aiming for hard-but-doable.</li>
+   <li><b>Comprehensible input.</b> Each unit has a story using its phrases in context, slightly above what you've drilled, with comprehension checks.</li>
+   <li><b>Output and shadowing.</b> Typing Spanish from English forces production; "say it aloud" exercises train pronunciation and rhythm.</li>
+   <li><b>Chunks over words.</b> You learn whole phrases you'd actually say, with grammar explained in each unit's guidebook when you need it.</li>
+   <li><b>Errors come back.</b> Anything you miss returns later in the same lesson, and its memory strength drops so it reappears in review.</li></ul></details></div>`;
+}
+let resetArm=false;
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]");if(!b)return;const a=b.dataset.act;
+  if(a==="node"){const n=NODES.find(x=>x.id===b.dataset.id);const idx=NODES.indexOf(n);if(idx>curIndex()){toast("Finish the earlier steps first, or use a jump test.");return}
+    if(n.k==="tip")openGuide(n.u,n.id);else if(n.k==="story")startStory(n.u,n.id);else startSession(n.k,n.u,n.id);return}
+  if(a==="guide"){openGuide(UNIT_BY_ID[+b.dataset.u],null);return}
+  if(a==="gdone"){if(b.dataset.node){S.done[b.dataset.node]=true;save()}closeOv();return}
+  if(a==="global"){startSession("global",null,null);return}
+  if(a==="jump"){startSession("jump",{sec:+b.dataset.sec},null);return}
+  if(a==="close"){closeOv();return}
+  if(a==="quit"){closeOv();return}
+  if(a==="say"||a==="sayslow"){speak(b.dataset.t,a==="sayslow");return}
+  if(a==="goal"){S.goal=+b.dataset.g;save();renderHome();return}
+  if(a==="dialect"){S.settings.dialect=b.dataset.v;save();renderRail();speak("Hola, ¿qué tal?");return}
+  if(a==="strict"){S.settings.strict=b.checked;save();return}
+  if(a==="reset"){if(!resetArm){resetArm=true;renderRail();setTimeout(()=>{resetArm=false;if(!L&&!P)renderRail()},4000);return}resetArm=false;S=DEFAULT();save();renderHome();toast("Progress erased.");return}
+  if(a==="tr"){const t=b.querySelector(".tr");t.hidden=!t.hidden;return}
+  if(a==="sq"){const k=+b.dataset.k,i=+b.dataset.i,q=P.ev[k].q;if(i===q.a){P.answered[k]=i;renderStory()}else{P.miss++;b.classList.remove("wrong");void b.offsetWidth;b.classList.add("wrong");b.disabled=true}return}
+  if(a==="snext"){storyNext();return}
+  if(!L)return;
+  if(a==="peek"){document.getElementById("peekt").hidden=false;b.hidden=true;return}
+  if(L.state!=="idle"){if(a==="cont")advance();else if(a==="countit")countIt();return}
+  if(a==="opt"){L.sel=+b.dataset.i;document.querySelectorAll(".opt").forEach(o=>o.setAttribute("aria-pressed",o===b?"true":"false"));const bl=document.getElementById("blank");if(bl)bl.textContent=L.queue[0].opts[L.sel];if(L.queue[0].type==="mcEnEs")speak(L.queue[0].opts[L.sel]);setCheckable(true);return}
+  if(a==="tile"){const i=+b.dataset.i;if(b.closest("#bank")){if(b.classList.contains("used"))return;b.classList.add("used");L.picked.push(i);const t=document.createElement("button");t.className="tile";t.dataset.act="tile";t.dataset.i=i;t.textContent=L.queue[0].tiles[i];document.getElementById("lane").appendChild(t)}else{L.picked=L.picked.filter(x=>x!==i);b.remove();document.querySelector(`#bank .tile[data-i="${i}"]`).classList.remove("used")}setCheckable(L.picked.length>0);return}
+  if(a==="acc"){const t=document.getElementById("ans");const s=t.selectionStart,en=t.selectionEnd;t.value=t.value.slice(0,s)+b.dataset.c+t.value.slice(en);t.focus();t.selectionStart=t.selectionEnd=s+1;setCheckable(t.value.trim().length>0);return}
+  if(a==="check"){evaluate();return}
+  if(a==="skip"){showResult(false,null,false);return}
+  if(a==="spoke"){showResult(true,null);return}
+  if(a==="skipspeak"){L.queue.shift();L.total--;if(!L.queue.length)return finish(true);renderEx();return}
+  if(a==="m"){const ex=L.queue[0];if(b.classList.contains("gone"))return;const side=b.dataset.side;if(side==="es")speak(b.textContent);
+    if(!L.mSel||L.mSel.dataset.side===side){if(L.mSel)L.mSel.setAttribute("aria-pressed","false");L.mSel=b;b.setAttribute("aria-pressed","true");return}
+    const A=L.mSel;L.mSel=null;A.setAttribute("aria-pressed","false");
+    if(A.dataset.i===b.dataset.i){[A,b].forEach(x=>{x.classList.add("right");setTimeout(()=>{x.classList.remove("right");x.classList.add("gone");x.disabled=true},350)});L.mLeft--;if(L.mLeft===0)setTimeout(()=>{L.queue[0].item=null;showResult(true,"All pairs matched.")},400)}
+    else{[A,b].forEach(x=>{x.classList.add("wrong");setTimeout(()=>x.classList.remove("wrong"),400)})}
+    return}
+});
+document.addEventListener("input",e=>{if(e.target.id==="ans"&&L&&L.state==="idle")setCheckable(e.target.value.trim().length>0)});
+document.addEventListener("keydown",e=>{
+  if(!L&&!P&&e.key==="Enter"){const c=ov.querySelector("#cont");if(c){e.preventDefault();c.click()}return}
+  if(P&&e.key==="Enter"){const c=document.getElementById("cont");if(c&&!c.disabled){e.preventDefault();c.click()}return}
+  if(!L)return;
+  if(e.key==="Enter"&&!e.shiftKey){if(L.state==="idle"){const c=document.getElementById("chk");if(c&&!c.disabled){e.preventDefault();c.click()}else if(e.target.id==="ans")e.preventDefault()}else{const c=document.getElementById("cont");if(c){e.preventDefault();c.click()}}return}
+  if(L.state==="idle"&&e.target.tagName!=="TEXTAREA"&&/^[1-4]$/.test(e.key)){const o=document.querySelectorAll(".opt")[+e.key-1];if(o)o.click()}
+});
+renderHome();
+setTimeout(initRemote,0);
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+</script>
+
+</body>
+</html>
